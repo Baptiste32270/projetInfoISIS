@@ -4,7 +4,6 @@
  */
 package gui;
 
-import gui.DisplayInterface;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
@@ -33,7 +32,15 @@ public class LettrePanel extends JPanel {
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
             "N", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         };
+        for (String value : lettres) {
+            LettresButton jb = new LettresButton(value);
+            jb.setFont(font);
+            jb.addActionListener((e)->{
+                display.append(value);
+            });
+        
+        this.add(jb);
     }
-    
+    }
    
 }
