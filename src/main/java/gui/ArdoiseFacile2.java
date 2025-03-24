@@ -3,13 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package gui;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
-public class ArdoiseFacile extends JPanel {
+public class ArdoiseFacile2 extends JPanel {
     private BufferedImage canvas; // Zone de dessin
     private Graphics2D g2d;       // Outil graphique pour dessiner
     private Color currentColor = Color.RED; // Couleur actuelle (par défaut : noir)
@@ -17,7 +16,7 @@ public class ArdoiseFacile extends JPanel {
     private int brushSize = 10;                // Taille du pinceau (10x10 pixels)
     private int eraserSize = 30;               // Taille de la gomme (30x30 pixels)
 
-    public ArdoiseFacile() {
+    public ArdoiseFacile2() {
         this.setLayout(null);
 
         // Dimensions de l'ardoise
