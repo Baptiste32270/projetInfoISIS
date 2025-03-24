@@ -33,7 +33,7 @@ public class Frame extends JFrame {
             accueil.setLayout(null);
             accueil.setBounds(0,0,this.getWidth(), this.getHeight());
             ArdoiseFacile ardoisef = new ArdoiseFacile();
-            root.add(ardoisef);
+            root.add(accueil);
             this.add(root);
             this.setJMenuBar(menu);
         
