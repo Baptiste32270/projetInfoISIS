@@ -8,24 +8,23 @@ package gui;
  *
  * @author rkiekenm
  */
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import java.awt.Font;
 
 public class QuestionPanel extends JPanel {
-    private JLabel questionLabel;
+    private final JLabel questionLabel;
 
     public QuestionPanel(Font font) {
-        this.setLayout(new BorderLayout());
-        questionLabel = new JLabel("Quel est le résultat ?");
+        questionLabel = new JLabel("Question", JLabel.CENTER);
         questionLabel.setFont(font);
-        this.add(questionLabel, BorderLayout.CENTER);
+        this.add(questionLabel);
     }
 
     public void setQuestion(String question) {
         questionLabel.setText(question);
     }
 }
+
 
 

@@ -54,19 +54,44 @@ public class CalculMentalFrame extends JFrame {
         this.setVisible(true);
     }
 
-    public void generateNewQuestion() {
+    public void generateNewQuestion(boolean isDifficult) {
         Random rand = new Random();
-        int num1 = rand.nextInt(10) + 1;
-        int num2 = rand.nextInt(10) + 1;
-        int operation = rand.nextInt(2);
-
+        int num1, num2;
         String question;
-        if (operation == 0) {
-            question = num1 + " + " + num2 + " = ?";
-            correctAnswer = num1 + num2;
-        } else {
-            question = num1 + " - " + num2 + " = ?";
-            correctAnswer = num1 - num2;
+        
+        // Niveau difficile
+        if (isDifficult) {
+            int operation = rand.nextInt(3);
+            if (operation == 0) { // Addition
+                num1 = rand.nextInt(900) + 100; // Nombre entre 100 et 999
+                num2 = rand.nextInt(900) + 100;
+                question = num1 + " + " + num2 + " = ?";
+                correctAnswer = num1 + num2;
+            } else if (operation == 1) { // Soustraction
+                num1 = rand.nextInt(900) + 100;
+                num2 = rand.nextInt(900) + 100;
+                question = num1 + " - " + num2 + " = ?";
+                correctAnswer = num1 - num2;
+            } else { // Multiplication
+                num1 = rand.nextInt(9) + 1; // Nombre entre 1 et 9
+                num2 = rand.nextInt(9) + 1;
+                question = num1 + " * " + num2 + " = ?";
+                correctAnswer = num1 * num2;
+            }
+        } 
+        // Niveau facile
+        else {
+            num1 = rand.nextInt(10) + 1;
+            num2 = rand.nextInt(10) + 1;
+            int operation = rand.nextInt(2);
+
+            if (operation == 0) {
+                question = num1 + " + " + num2 + " = ?";
+                correctAnswer = num1 + num2;
+            } else {
+                question = num1 + " - " + num2 + " = ?";
+                correctAnswer = num1 - num2;
+            }
         }
 
         questionPanel.setQuestion(question);
@@ -91,3 +116,4 @@ public class CalculMentalFrame extends JFrame {
         new CalculMentalFrame();
     }
 }
+

@@ -49,7 +49,7 @@ public class AnswerPanel extends JPanel {
         newQuestionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parentFrame.generateNewQuestion();  // Appelle la méthode pour générer une nouvelle question
+                parentFrame.generateNewQuestion(true);  // Appelle la méthode pour générer une nouvelle question, difficulté difficile
             }
         });
     }

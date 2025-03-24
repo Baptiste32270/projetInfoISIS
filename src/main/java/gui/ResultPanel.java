@@ -8,23 +8,22 @@ package gui;
  *
  * @author rkiekenm
  */
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import java.awt.Font;
 
 public class ResultPanel extends JPanel {
-    private JLabel resultLabel;
+    private final JLabel resultLabel;
 
     public ResultPanel(Font font) {
-        this.setLayout(new BorderLayout());
-        resultLabel = new JLabel(" ");
+        resultLabel = new JLabel("Résultat", JLabel.CENTER);
         resultLabel.setFont(font);
-        this.add(resultLabel, BorderLayout.CENTER);
+        this.add(resultLabel);
     }
 
     public void setResult(String result) {
         resultLabel.setText(result);
     }
 }
+
 
