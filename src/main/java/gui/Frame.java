@@ -33,7 +33,13 @@ public class Frame extends JFrame {
             accueil.setLayout(null);
             accueil.setBounds(0,0,this.getWidth(), this.getHeight());
             ArdoiseFacile ardoisef = new ArdoiseFacile();
+            ArdoiseDifficile ardoised = new ArdoiseDifficile();
             root.add(ardoisef);
+            ardoisef.setVisible(false);
+            root.add(ardoised);
+            ardoised.setVisible(false);
+            root.add(accueil);
+            accueil.setVisible(true);
             this.add(root);
             this.setJMenuBar(menu);
         
@@ -41,5 +47,7 @@ public class Frame extends JFrame {
             this.setLocationRelativeTo(null);
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.setVisible(true);
+            
+          
     }
 }

@@ -3,20 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package gui;
+
+/**
+ *
+ * @author bapti
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
-public class ArdoiseFacile2 extends JPanel {
+public class ArdoiseDifficile extends JPanel {
     private BufferedImage canvas; // Zone de dessin
     private Graphics2D g2d;       // Outil graphique pour dessiner
-    private Color currentColor = Color.RED; // Couleur actuelle (par défaut : noir)
+    private Color currentColor = Color.RED; // Couleur actuelle (par défaut : rouge)
     private boolean isErasing = false;        // Mode gomme
     private int brushSize = 10;                // Taille du pinceau (10x10 pixels)
     private int eraserSize = 30;               // Taille de la gomme (30x30 pixels)
 
-    public ArdoiseFacile2() {
+    public ArdoiseDifficile() {
         this.setLayout(null);
 
         // Dimensions de l'ardoise
@@ -56,6 +61,7 @@ public class ArdoiseFacile2 extends JPanel {
         // Barre d'outils (boutons)
         Font font = new Font("Arial", Font.BOLD, 10);
 
+        // Bouton Effacer
         JButton effacer = new JButton("Effacer");
         effacer.setBounds(500, 700, 100, 50);
         effacer.setFont(font);
@@ -65,6 +71,7 @@ public class ArdoiseFacile2 extends JPanel {
         });
         this.add(effacer);
 
+        // Bouton Gomme
         JButton gomme = new JButton("Gomme");
         gomme.setBounds(610, 700, 100, 50);
         gomme.setFont(font);
@@ -73,8 +80,22 @@ public class ArdoiseFacile2 extends JPanel {
         });
         this.add(gomme);
 
+        // Bouton pour choisir une couleur
+        JButton choisirCouleur = new JButton("Choisir Couleur");
+        choisirCouleur.setBounds(720, 700, 150, 50);
+        choisirCouleur.setFont(font);
+        choisirCouleur.addActionListener(e -> {
+            // Ouvrir un JColorChooser pour choisir une couleur
+            Color color = JColorChooser.showDialog(this, "Choisir une couleur", currentColor);
+            if (color != null) {
+                currentColor = color; // Mettre à jour la couleur actuelle
+            }
+        });
+        this.add(choisirCouleur);
+
+        // Boutons pour des couleurs spécifiques (si besoin)
         JButton rouge = new JButton("Rouge");
-        rouge.setBounds(720, 700, 100, 50);
+        rouge.setBounds(880, 700, 100, 50);
         rouge.setFont(font);
         rouge.setForeground(Color.RED);
         rouge.addActionListener(e -> {
@@ -84,7 +105,7 @@ public class ArdoiseFacile2 extends JPanel {
         this.add(rouge);
 
         JButton vert = new JButton("Vert");
-        vert.setBounds(830, 700, 100, 50);
+        vert.setBounds(990, 700, 100, 50);
         vert.setFont(font);
         vert.setForeground(Color.GREEN);
         vert.addActionListener(e -> {
@@ -94,7 +115,7 @@ public class ArdoiseFacile2 extends JPanel {
         this.add(vert);
 
         JButton bleu = new JButton("Bleu");
-        bleu.setBounds(940, 700, 100, 50);
+        bleu.setBounds(1100, 700, 100, 50);
         bleu.setFont(font);
         bleu.setForeground(Color.BLUE);
         bleu.addActionListener(e -> {
