@@ -24,9 +24,13 @@ public class LettrePanel extends JPanel {
         initGui();
     }
 
+    LettrePanel() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     private void initGui() {
     this.setFont(font);
-        GridLayout g1 = new GridLayout(2,2,3,3);
+        GridLayout g1 = new GridLayout(2,9,3,3);
         this.setLayout(g1);
         String[] lettres = {
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
