@@ -9,21 +9,21 @@ package gui;
  * @author rkiekenm
  */
 import java.awt.BorderLayout;
-import javax.swing.JTextField;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
-public class AnswerPanel extends JPanel {
+public class AnswerPanelDifficile extends JPanel {
     private JTextField answerField;
     private JButton checkButton;
     private JButton newQuestionButton;
-    private final CalculMentalFrame parentFrame;
+    private final CalculMentalFrameDifficile parentFrame;
 
-    public AnswerPanel(Font font, CalculMentalFrame parentFrame) {
-        this.parentFrame = parentFrame;  // Assure-toi que la référence à la fenêtre principale est bien passée ici
+    public AnswerPanelDifficile(Font font, CalculMentalFrameDifficile parentFrame) {
+        this.parentFrame = parentFrame;
         this.setLayout(new BorderLayout());
 
         answerField = new JTextField(10);
@@ -42,14 +42,14 @@ public class AnswerPanel extends JPanel {
         checkButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parentFrame.checkAnswer();  // Appelle la méthode de vérification dans la fenêtre principale
+                parentFrame.checkAnswer();
             }
         });
 
         newQuestionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parentFrame.generateNewQuestion(true);  // Appelle la méthode pour générer une nouvelle question, difficulté difficile
+                parentFrame.generateNewQuestionDifficile(); // Supprimé le paramètre booléen
             }
         });
     }

@@ -14,84 +14,67 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Random;
 
-public class CalculMentalFrame extends JFrame {
+public class CalculMentalFrameDifficile extends JFrame {
     private final QuestionPanel questionPanel;
-    private final AnswerPanel answerPanel;
+    private final AnswerPanelDifficile answerPanel;
     private final ResultPanel resultPanel;
 
     private int correctAnswer;
 
-    public CalculMentalFrame() {
-        this("Jeu de calcul mental", 18);
+    public CalculMentalFrameDifficile() {
+        this("Calcul Mental - Difficile", 18);
     }
 
-    public CalculMentalFrame(String title, int fontSize) {
+    public CalculMentalFrameDifficile(String title, int fontSize) {
         super(title);
         Font font = new Font("Serif", Font.BOLD, fontSize);
         this.setFont(font);
 
         // Initialisation des panneaux
         this.questionPanel = new QuestionPanel(font);
-        this.answerPanel = new AnswerPanel(font, this);  // Passer la fenêtre principale ici
+        this.answerPanel = new AnswerPanelDifficile(font, this);
         this.resultPanel = new ResultPanel(font);
 
         initGui();
+        generateNewQuestionDifficile();
     }
 
     private void initGui() {
         JPanel root = new JPanel();
         root.setLayout(new BorderLayout(5, 5));
 
-        // Ajout des panneaux dans la fenêtre
         root.add(questionPanel, BorderLayout.NORTH);
         root.add(answerPanel, BorderLayout.CENTER);
         root.add(resultPanel, BorderLayout.SOUTH);
 
         this.add(root);
         this.pack();
-        this.setLocationRelativeTo(null);  // Centrer la fenêtre
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
-    public void generateNewQuestion(boolean isDifficult) {
+    public void generateNewQuestionDifficile() {
         Random rand = new Random();
         int num1, num2;
         String question;
-        
-        // Niveau difficile
-        if (isDifficult) {
-            int operation = rand.nextInt(3);
-            if (operation == 0) { // Addition
-                num1 = rand.nextInt(900) + 100; // Nombre entre 100 et 999
-                num2 = rand.nextInt(900) + 100;
-                question = num1 + " + " + num2 + " = ?";
-                correctAnswer = num1 + num2;
-            } else if (operation == 1) { // Soustraction
-                num1 = rand.nextInt(900) + 100;
-                num2 = rand.nextInt(900) + 100;
-                question = num1 + " - " + num2 + " = ?";
-                correctAnswer = num1 - num2;
-            } else { // Multiplication
-                num1 = rand.nextInt(9) + 1; // Nombre entre 1 et 9
-                num2 = rand.nextInt(9) + 1;
-                question = num1 + " * " + num2 + " = ?";
-                correctAnswer = num1 * num2;
-            }
-        } 
-        // Niveau facile
-        else {
-            num1 = rand.nextInt(10) + 1;
-            num2 = rand.nextInt(10) + 1;
-            int operation = rand.nextInt(2);
 
-            if (operation == 0) {
-                question = num1 + " + " + num2 + " = ?";
-                correctAnswer = num1 + num2;
-            } else {
-                question = num1 + " - " + num2 + " = ?";
-                correctAnswer = num1 - num2;
-            }
+        int operation = rand.nextInt(3);
+        if (operation == 0) { // Addition
+            num1 = rand.nextInt(900) + 100; // Nombre entre 100 et 999
+            num2 = rand.nextInt(900) + 100;
+            question = num1 + " + " + num2 + " = ?";
+            correctAnswer = num1 + num2;
+        } else if (operation == 1) { // Soustraction
+            num1 = rand.nextInt(900) + 100;
+            num2 = rand.nextInt(900) + 100;
+            question = num1 + " - " + num2 + " = ?";
+            correctAnswer = num1 - num2;
+        } else { // Multiplication
+            num1 = rand.nextInt(9) + 1; // Nombre entre 1 et 9
+            num2 = rand.nextInt(9) + 1;
+            question = num1 + " * " + num2 + " = ?";
+            correctAnswer = num1 * num2;
         }
 
         questionPanel.setQuestion(question);
@@ -113,7 +96,7 @@ public class CalculMentalFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        new CalculMentalFrame();
+        new CalculMentalFrameDifficile();
     }
 }
 
