@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class AccueilPanel extends JPanel {
 	
-	public AccueilPanel() {
+	public AccueilPanel(Frame frame) {
 		this.setLayout(null);
 		Font font = new Font("Arial", Font.BOLD, 20);
                 
@@ -22,6 +22,11 @@ public class AccueilPanel extends JPanel {
 		dessin.setBounds(607,210,300,100);
 		dessin.setFont(font);
 		this.add(dessin);
+                dessin.addActionListener(e -> {
+                    frame.setContentPane(new ArdoiseFacile(frame));
+                    frame.revalidate();
+                    frame.repaint();
+                });
                 
 		JButton pendu = new JButton("Pendu");
 		pendu.setBounds(607,330,300,100);

@@ -17,7 +17,7 @@ public class ArdoiseFacile extends JPanel {
     private int brushSize = 10;                // Taille du pinceau (10x10 pixels)
     private int eraserSize = 30;               // Taille de la gomme (30x30 pixels)
 
-    public ArdoiseFacile() {
+    public ArdoiseFacile(JFrame frame) {
         this.setLayout(null);
 
         // Dimensions de l'ardoise

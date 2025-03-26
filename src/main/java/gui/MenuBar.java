@@ -8,16 +8,23 @@ package gui;
  *
  * @author bapti
  */
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
 public class MenuBar extends JMenuBar {
-	
-	public MenuBar() {
+	private JFrame frame;
+	public MenuBar(JFrame frame) {
+                this.frame = frame;
 		JMenu activite = new JMenu("Activités");
 		JMenuItem dessin = new JMenuItem("Ardoise Magique");
+                dessin.addActionListener(e -> {
+                    frame.setContentPane(new ArdoiseFacile(frame));
+                    frame.revalidate();
+                    frame.repaint();
+                });
 		JMenuItem calcul = new JMenuItem("Calcul Mental");
 		JMenuItem pendu = new JMenuItem("Pendu");
 		
