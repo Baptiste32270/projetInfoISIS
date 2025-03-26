@@ -25,16 +25,16 @@ public class Frame extends JFrame {
 	
 	private void initGui() {
 		JPanel root = new JPanel();
-        BorderLayout bl = new BorderLayout(5, 5);
-        root.setLayout(bl);
-        MenuBar menu = new MenuBar();
+            BorderLayout bl = new BorderLayout(5, 5);
+            root.setLayout(bl);
+            MenuBar menu = new MenuBar();
         
-        AccueilPanel accueil = new AccueilPanel();
-        accueil.setLayout(null);
-        accueil.setBounds(0,0,this.getWidth(), this.getHeight());
-        root.add(accueil);
-        this.add(root);
-        this.setJMenuBar(menu);
+            AccueilPanel accueil = new AccueilPanel();
+            accueil.setLayout(null);
+            accueil.setBounds(0,0,this.getWidth(), this.getHeight());
+            root.add(accueil);
+            this.add(root);
+            this.setJMenuBar(menu);
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);

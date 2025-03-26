@@ -16,5 +16,11 @@ public enum Dictionnaire{
         INFORMATIQUE,
         EVOLUER,
         CLASSE;
+    
+public static String getMotAleatoire() {
+        Dictionnaire[] mots = Dictionnaire.values();
+        int index = (int) (Math.random() * mots.length);  // Choisir un mot aléatoire
+        return mots[index].name();  // Retourner le mot sous forme de chaîne
     }
+}
 

@@ -1,16 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package gui;
 
-/**
- *
- * @author oguera
- */
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.Border;
+import java.util.Random;
 
 /**
  * Afficheur pour le mot à deviner dans le jeu du pendu.
@@ -20,12 +13,20 @@ public class MotPanel extends JPanel {
 
     private final JLabel displayLabel;
     private final Font font;
+    private String motSecret;  // Le mot à deviner
+    private String lettresDevinees;  // Les lettres devinées par l'utilisateur
 
     public MotPanel(Font font) {
         super();
         this.font = font;
         this.displayLabel = new JLabel("", JLabel.CENTER);
+        this.lettresDevinees = "";
         initGui();
+        choisirMotSecret();  // Choisir un mot aléatoire
+    }
+
+    MotPanel() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     private void initGui() {
@@ -44,27 +45,43 @@ public class MotPanel extends JPanel {
     }
 
     /**
+     * Choisit un mot aléatoire dans l'énum Dictionnaire.
+     */
+    private void choisirMotSecret() {
+        Dictionnaire[] valeurs = Dictionnaire.values();
+        Random random = new Random();
+        int index = random.nextInt(valeurs.length);
+        motSecret = valeurs[index].toString();
+    }
+
+    /**
      * Met à jour l'affichage avec les lettres devinées et les espaces pour celles non devinées.
      * Exemple : "A _ P _ E _" pour le mot "APPLE" avec "A", "P" et "E" devinés.
      */
-    public void updateDisplay(String wordToGuess, String guessedLetters) {
+    public void updateDisplay(String guessedLetter) {
+        if (motSecret.contains(guessedLetter)) {
+            lettresDevinees += guessedLetter;  // Ajouter la lettre devinée
+        }
+
         StringBuilder displayText = new StringBuilder();
 
-        for (int i = 0; i < wordToGuess.length(); i++) {
-            char letter = wordToGuess.charAt(i);
+        for (int i = 0; i < motSecret.length(); i++) {
+            char letter = motSecret.charAt(i);
             // Si la lettre a été devinée, l'afficher, sinon afficher un underscore (_)
-            if (guessedLetters.indexOf(letter) != -1) {
+            if (lettresDevinees.indexOf(letter) != -1) {
                 displayText.append(letter).append(" ");
             } else {
                 displayText.append("_ ").append(" ");
             }
         }
 
-        // Affichage du mot sous forme lisible
+        // Affichage du mot sous forme lisible avec tirets pour les lettres non devinées
         displayLabel.setText(displayText.toString().trim());
     }
 
     public void reset() {
+        this.lettresDevinees = "";
         this.displayLabel.setText("");
+        choisirMotSecret();  // Rechoisir un mot aléatoire
     }
 }

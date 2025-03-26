@@ -25,7 +25,8 @@ public class LettrePanel extends JPanel {
     }
 
     LettrePanel() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this(null, null);
+        initGui();
     }
 
     private void initGui() {
@@ -34,7 +35,7 @@ public class LettrePanel extends JPanel {
         this.setLayout(g1);
         String[] lettres = {
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-            "N", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+            "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         };
         for (String value : lettres) {
             LettresButton jb = new LettresButton(value);
