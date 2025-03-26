@@ -16,10 +16,10 @@ import java.util.Random;
 
 public class CalculMentalFacile extends JFrame {
     private final QuestionPanel questionPanel;
-    private final ReponsePanelFacile answerPanel;
+    private final ReponsePanelFacile reponsePanel;
     private final ResultPanel resultPanel;
 
-    private int correctAnswer;
+    private int correctReponse;
 
     public CalculMentalFacile() {
         this("Calcul Mental - Facile", 18);
@@ -32,7 +32,7 @@ public class CalculMentalFacile extends JFrame {
 
         // Initialisation des panneaux
         this.questionPanel = new QuestionPanel(font);
-        this.answerPanel = new ReponsePanelFacile(font, this);
+        this.reponsePanel = new ReponsePanelFacile(font, this);
         this.resultPanel = new ResultPanel(font);
 
         initGui();
@@ -44,7 +44,7 @@ public class CalculMentalFacile extends JFrame {
         root.setLayout(new BorderLayout(5, 5));
 
         root.add(questionPanel, BorderLayout.NORTH);
-        root.add(answerPanel, BorderLayout.CENTER);
+        root.add(reponsePanel, BorderLayout.CENTER);
         root.add(resultPanel, BorderLayout.SOUTH);
 
         this.add(root);
@@ -63,21 +63,28 @@ public class CalculMentalFacile extends JFrame {
 
         if (operation == 0) {
             question = num1 + " + " + num2 + " = ?";
-            correctAnswer = num1 + num2;
-        } else {
-            question = num1 + " - " + num2 + " = ?";
-            correctAnswer = num1 - num2;
+            correctReponse = num1 + num2;
+         } else { // Soustraction
+        // Si la soustraction donne un résultat négatif, inverser les nombres
+        if (num1 < num2) {
+            int temp = num1;
+            num1 = num2;
+            num2 = temp;
+        }
+
+        question = num1 + " - " + num2 + " = ?";
+        correctReponse = num1 - num2;
         }
 
         questionPanel.setQuestion(question);
-        answerPanel.clearAnswer();
+        reponsePanel.clearAnswer();
         resultPanel.setResult(" ");
     }
 
     public void checkAnswer() {
         try {
-            int userAnswer = Integer.parseInt(answerPanel.getAnswer());
-            if (userAnswer == correctAnswer) {
+            int userAnswer = Integer.parseInt(reponsePanel.getAnswer());
+            if (userAnswer == correctReponse) {
                 resultPanel.setResult("Correct !");
             } else {
                 resultPanel.setResult("Faux, essayez encore !");
