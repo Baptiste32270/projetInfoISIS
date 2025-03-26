@@ -17,6 +17,9 @@ import javax.swing.JSeparator;
 public class MenuBar extends JMenuBar {
 	private JFrame frame;
 	public MenuBar(JFrame frame) {
+                ArdoiseFacile ardoiseFacile = new ArdoiseFacile(frame);
+                ArdoiseDifficile ardoiseDifficile = new ArdoiseDifficile(frame);
+            
                 this.frame = frame;
 		JMenu activite = new JMenu("Activités");
 		JMenuItem dessin = new JMenuItem("Ardoise Magique");
@@ -28,13 +31,30 @@ public class MenuBar extends JMenuBar {
 		JMenuItem calcul = new JMenuItem("Calcul Mental");
 		JMenuItem pendu = new JMenuItem("Pendu");
 		
+                JMenu retour = new JMenu("Accueil");
+                JMenuItem accueil = new JMenuItem("Accueil");
+                accueil.addActionListener(e -> {
+                    frame.setContentPane(new AccueilPanel(frame));
+                    frame.revalidate();
+                    frame.repaint();
+                });
+                
 		JMenu difficulte = new JMenu("Difficulté");
 		JMenuItem facile = new JMenuItem("Facile");
 		JMenuItem difficile = new JMenuItem("Difficile");
+                difficile.addActionListener(e -> {
+                    if (frame.getContentPane() == ardoiseFacile) {
+                        frame.setContentPane(ardoiseDifficile);
+                        frame.revalidate();
+                        frame.repaint();
+                    }
+                });
 		
 		difficulte.add(facile);
 		difficulte.add(new JSeparator());
 		difficulte.add(difficile);
+                
+                retour.add(accueil);
 		
 		activite.add(dessin);
 		activite.add(new JSeparator());
@@ -42,6 +62,7 @@ public class MenuBar extends JMenuBar {
 		activite.add(new JSeparator());
 		activite.add(pendu);
 		
+                this.add(retour);
 		this.add(activite);
 		this.add(difficulte);
 	}
