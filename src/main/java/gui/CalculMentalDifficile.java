@@ -14,25 +14,25 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Random;
 
-public class CalculMentalFrameDifficile extends JFrame {
+public class CalculMentalDifficile extends JFrame {
     private final QuestionPanel questionPanel;
-    private final AnswerPanelDifficile answerPanel;
+    private final ReponsePanelDifficile answerPanel;
     private final ResultPanel resultPanel;
 
     private int correctAnswer;
 
-    public CalculMentalFrameDifficile() {
+    public CalculMentalDifficile() {
         this("Calcul Mental - Difficile", 18);
     }
 
-    public CalculMentalFrameDifficile(String title, int fontSize) {
+    public CalculMentalDifficile(String title, int fontSize) {
         super(title);
         Font font = new Font("Serif", Font.BOLD, fontSize);
         this.setFont(font);
 
         // Initialisation des panneaux
         this.questionPanel = new QuestionPanel(font);
-        this.answerPanel = new AnswerPanelDifficile(font, this);
+        this.answerPanel = new ReponsePanelDifficile(font, this);
         this.resultPanel = new ResultPanel(font);
 
         initGui();
@@ -96,7 +96,7 @@ public class CalculMentalFrameDifficile extends JFrame {
     }
 
     public static void main(String[] args) {
-        new CalculMentalFrameDifficile();
+        new CalculMentalDifficile();
     }
 }
 

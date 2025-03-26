@@ -42,13 +42,6 @@ public class Frame extends JFrame {
         this.setVisible(true);
     }
 
-    public void showCalculMental() {
-        CalculMentalFrameDifficile calculMentalFrame = new CalculMentalFrameDifficile();
-        
-        this.getContentPane().removeAll();
-        this.add(calculMentalFrame);
-        this.revalidate();
-        this.repaint();
-    }
+    
         
 }

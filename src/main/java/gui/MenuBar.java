@@ -8,13 +8,12 @@ package gui;
  *
  * @author bapti
  */
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
-import javax.swing.SwingUtilities;
+
 
 public class MenuBar extends JMenuBar {
 	
@@ -41,14 +40,7 @@ public class MenuBar extends JMenuBar {
 		this.add(activite);
 		this.add(difficulte);
                 
-                //Permet de cliquer dans la menu bar sur Calcul Mental
-                calcul.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Passer à l'écran du jeu Calcul Mental dans la fenêtre principale
-                ((Frame) SwingUtilities.getWindowAncestor(MenuBar.this)).showCalculMental();
-            }
-        });
+                
                 
 	}
 

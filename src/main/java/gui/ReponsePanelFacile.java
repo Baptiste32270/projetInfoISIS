@@ -4,10 +4,6 @@
  */
 package gui;
 
-/**
- *
- * @author rkiekenm
- */
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,13 +12,13 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AnswerPanelDifficile extends JPanel {
+public class ReponsePanelFacile extends JPanel {
     private JTextField answerField;
     private JButton checkButton;
     private JButton newQuestionButton;
-    private final CalculMentalFrameDifficile parentFrame;
+    private final CalculMentalFacile parentFrame;
 
-    public AnswerPanelDifficile(Font font, CalculMentalFrameDifficile parentFrame) {
+    public ReponsePanelFacile(Font font, CalculMentalFacile parentFrame) {
         this.parentFrame = parentFrame;
         this.setLayout(new BorderLayout());
 
@@ -49,7 +45,7 @@ public class AnswerPanelDifficile extends JPanel {
         newQuestionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parentFrame.generateNewQuestionDifficile(); // Supprimé le paramètre booléen
+                parentFrame.generateNewQuestionFacile(); // Supprimé le paramètre booléen
             }
         });
     }
