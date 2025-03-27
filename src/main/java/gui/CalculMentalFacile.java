@@ -10,25 +10,24 @@ package gui;
  */
 import java.awt.BorderLayout;
 import java.awt.Font;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Random;
+import javax.swing.JFrame;
 
-public class CalculMentalFacile extends JFrame {
+public class CalculMentalFacile extends JPanel {
     private final QuestionPanel questionPanel;
     private final ReponsePanelFacile reponsePanel;
     private final ResultPanel resultPanel;
+    private JFrame frame = new JFrame();
 
     private int correctReponse;
 
-    public CalculMentalFacile() {
-        this("Calcul Mental - Facile", 18);
-    }
+    //public CalculMentalFacile() {
+        //this(18, frame);
+    //}
 
-    public CalculMentalFacile(String title, int fontSize) {
-        super(title);
+    public CalculMentalFacile(int fontSize, JFrame frame) {
         Font font = new Font("Serif", Font.BOLD, fontSize);
-        this.setFont(font);
 
         // Initialisation des panneaux
         this.questionPanel = new QuestionPanel(font);
@@ -40,18 +39,11 @@ public class CalculMentalFacile extends JFrame {
     }
 
     private void initGui() {
-        JPanel root = new JPanel();
-        root.setLayout(new BorderLayout(5, 5));
+        this.setLayout(new BorderLayout(5, 5));
 
-        root.add(questionPanel, BorderLayout.NORTH);
-        root.add(reponsePanel, BorderLayout.CENTER);
-        root.add(resultPanel, BorderLayout.SOUTH);
-
-        this.add(root);
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setVisible(true);
+        this.add(questionPanel, BorderLayout.NORTH);
+        this.add(reponsePanel, BorderLayout.CENTER);
+        this.add(resultPanel, BorderLayout.SOUTH);
     }
 
     public void generateNewQuestionFacile() {
@@ -64,16 +56,15 @@ public class CalculMentalFacile extends JFrame {
         if (operation == 0) {
             question = num1 + " + " + num2 + " = ?";
             correctReponse = num1 + num2;
-         } else { // Soustraction
-        // Si la soustraction donne un résultat négatif, inverser les nombres
-        if (num1 < num2) {
-            int temp = num1;
-            num1 = num2;
-            num2 = temp;
-        }
+        } else { // Soustraction
+            if (num1 < num2) {
+                int temp = num1;
+                num1 = num2;
+                num2 = temp;
+            }
 
-        question = num1 + " - " + num2 + " = ?";
-        correctReponse = num1 - num2;
+            question = num1 + " - " + num2 + " = ?";
+            correctReponse = num1 - num2;
         }
 
         questionPanel.setQuestion(question);
@@ -94,4 +85,3 @@ public class CalculMentalFacile extends JFrame {
         }
     }
 }
-

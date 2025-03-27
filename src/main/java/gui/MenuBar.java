@@ -29,6 +29,11 @@ public class MenuBar extends JMenuBar {
                 frame.repaint();
             });
             JMenuItem calcul = new JMenuItem("Calcul Mental");
+            calcul.addActionListener(e -> {
+                frame.setContentPane(new CalculMentalFacile(18, frame));
+                frame.revalidate();
+                frame.repaint();
+            });
             JMenuItem pendu = new JMenuItem("Pendu");
 		
             JMenu retour = new JMenu("Accueil");
