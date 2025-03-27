@@ -15,19 +15,19 @@ public class MotPanel extends JPanel {
     public MotPanel(Font font) {
         super();
         this.font = font;
-        this.displayLabel = new JLabel("", JLabel.CENTER);
+        this.displayLabel = new JLabel(" ", JLabel.CENTER);
         this.lettresDevinees = "";
-        initGui();
         choisirMotSecret();  // Choisir un mot aléatoire
+        initGui();
     }
 
     MotPanel() {
         super();
         this.font = new Font("Arial", Font.PLAIN, 24);  // Par défaut
-        this.displayLabel = new JLabel("", JLabel.CENTER);
+        this.displayLabel = new JLabel(" ", JLabel.CENTER);
         this.lettresDevinees = "";
-        initGui();
         choisirMotSecret();  // Choisir un mot aléatoire
+        initGui();
     }
 
     private void initGui() {
@@ -50,6 +50,7 @@ public class MotPanel extends JPanel {
         Random random = new Random();
         int index = random.nextInt(valeurs.length);
         motSecret = valeurs[index].toString();
+        updateDisplay(" ");
     }
 
     public void updateDisplay(String guessedLetter) {
@@ -73,7 +74,7 @@ public class MotPanel extends JPanel {
 
     public void reset() {
         this.lettresDevinees = "";
-        this.displayLabel.setText("");
+        this.displayLabel.setText(" ");
         choisirMotSecret();  // Rechoisir un mot aléatoire
     }
 }

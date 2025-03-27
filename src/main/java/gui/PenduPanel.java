@@ -9,6 +9,7 @@ public class PenduPanel extends JPanel {
 
     public PenduPanel() {
         this.attemptsLeft = 6;  // Nombre maximal de tentatives
+        repaint();
     }
 
     public void setAttemptsLeft(int attemptsLeft) {
