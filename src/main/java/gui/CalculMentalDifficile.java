@@ -10,25 +10,19 @@ package gui;
  */
 import java.awt.BorderLayout;
 import java.awt.Font;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Random;
+import javax.swing.JFrame;
 
-public class CalculMentalDifficile extends JFrame {
+public class CalculMentalDifficile extends JPanel {
     private final QuestionPanel questionPanel;
     private final ReponsePanelDifficile reponsePanel;
     private final ResultPanel resultPanel;
 
     private int correctReponse;
 
-    public CalculMentalDifficile() {
-        this("Calcul Mental - Difficile", 18);
-    }
-
-    public CalculMentalDifficile(String title, int fontSize) {
-        super(title);
+    public CalculMentalDifficile(int fontSize, JFrame frame) {
         Font font = new Font("Serif", Font.BOLD, fontSize);
-        this.setFont(font);
 
         // Initialisation des panneaux
         this.questionPanel = new QuestionPanel(font);
@@ -36,22 +30,18 @@ public class CalculMentalDifficile extends JFrame {
         this.resultPanel = new ResultPanel(font);
 
         initGui();
+        frame.setSize(300, 200);
+        frame.setLocationRelativeTo(null);
         generateNewQuestionDifficile();
     }
 
     private void initGui() {
-        JPanel root = new JPanel();
-        root.setLayout(new BorderLayout(5, 5));
+        this.setLayout(new BorderLayout(5, 5));
 
-        root.add(questionPanel, BorderLayout.NORTH);
-        root.add(reponsePanel, BorderLayout.CENTER);
-        root.add(resultPanel, BorderLayout.SOUTH);
-
-        this.add(root);
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setVisible(true);
+        // Ajout des panneaux
+        this.add(questionPanel, BorderLayout.NORTH);
+        this.add(reponsePanel, BorderLayout.CENTER);
+        this.add(resultPanel, BorderLayout.SOUTH);
     }
 
     public void generateNewQuestionDifficile() {
@@ -93,10 +83,6 @@ public class CalculMentalDifficile extends JFrame {
         } catch (NumberFormatException e) {
             resultPanel.setResult("Veuillez entrer un nombre valide.");
         }
-    }
-
-    public static void main(String[] args) {
-        new CalculMentalDifficile();
     }
 }
 

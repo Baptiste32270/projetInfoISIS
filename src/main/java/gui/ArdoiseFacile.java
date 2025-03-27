@@ -103,6 +103,7 @@ public class ArdoiseFacile extends JPanel {
             isErasing = false;         // Désactiver le mode gomme
         });
         this.add(bleu);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     // Méthode pour dessiner
