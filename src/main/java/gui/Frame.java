@@ -42,5 +42,16 @@ public class Frame extends JFrame {
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.setVisible(true);
     }
+
+    public void showCalculMental() {
+        // Créer un nouveau panel pour le jeu Calcul Mental
+        CalculMentalFrame calculMentalFrame = new CalculMentalFrame();
+        
+        // Remplacer l'écran actuel par celui du jeu
+        this.getContentPane().removeAll();
+        this.add(calculMentalFrame);
+        this.revalidate();
+        this.repaint();
+    }
         
 }

@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 public class AccueilPanel extends JPanel {
 	
 	public AccueilPanel(JFrame frame) {
@@ -30,5 +31,7 @@ public class AccueilPanel extends JPanel {
 		calcul.setBounds(607,450,300,100);
 		calcul.setFont(font);
 		this.add(calcul);
+                
+            
 	}
 }
