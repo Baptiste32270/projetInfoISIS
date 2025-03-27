@@ -12,6 +12,6 @@ import gui.PenduFinal;
  */
 public class Pendu {
     public static void main(String[] args) {
-        PenduFinal p1 = new PenduFinal();
+        PenduFinal pendu = new PenduFinal();
     }
 }
