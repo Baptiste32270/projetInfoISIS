@@ -1,21 +1,17 @@
 package gui;
 
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.Font;
 
-/**
- * Un bouton personnalisé pour afficher des lettres.
- */
 public class LettresButton extends JButton {
 
     public LettresButton(String text) {
-        super(text);  // Le texte du bouton
+        super(text);
         setProperties();  // Personnalisation
     }
 
-    // Personnalisation du bouton (sans couleurs)
     private void setProperties() {
-        setFont(new Font("Arial", Font.BOLD, 20));  // Police
-        setBorderPainted(true);  // Bordure visible;
+        setFont(new Font("Arial", Font.BOLD, 20));
+        setBorderPainted(true);
     }
 }
