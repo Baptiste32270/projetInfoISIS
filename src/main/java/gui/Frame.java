@@ -27,12 +27,12 @@ public class Frame extends JFrame {
             JPanel root = new JPanel();
             BorderLayout bl = new BorderLayout(5, 5);
             root.setLayout(bl);
-            MenuBar menu = new MenuBar();
+            MenuBar menu = new MenuBar(this);
         
-            AccueilPanel accueil = new AccueilPanel();
+            AccueilPanel accueil = new AccueilPanel(this);
             accueil.setLayout(null);
             accueil.setBounds(0,0,this.getWidth(), this.getHeight());
-            ArdoiseFacile ardoisef = new ArdoiseFacile();
+            ArdoiseFacile ardoisef = new ArdoiseFacile(this);
             root.add(accueil);
             this.add(root);
             this.setJMenuBar(menu);

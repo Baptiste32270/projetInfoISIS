@@ -10,7 +10,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class ArdoiseFacile extends JFrame {
-    public ArdoiseFacile() {
+    public ArdoiseFacile(JFrame frame) {
         
     }
 }

@@ -10,11 +10,12 @@ package gui;
  */
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class AccueilPanel extends JPanel {
 	
-	public AccueilPanel() {
+	public AccueilPanel(JFrame frame) {
 		this.setLayout(null);
 		Font font = new Font("Arial", Font.BOLD, 20);
 		JButton dessin = new JButton("Ardoise Magique");
