@@ -42,4 +42,5 @@ public class Frame extends JFrame {
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.setVisible(true);
     }
+        
 }
