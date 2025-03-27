@@ -4,31 +4,39 @@
  */
 package gui;
 
-/**
- *
- * @author rkiekenm
- */
 import java.awt.BorderLayout;
-import javax.swing.JTextField;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
-public class AnswerPanel extends JPanel {
+public class ReponsePanelFacile extends JPanel {
     private JTextField answerField;
     private JButton checkButton;
     private JButton newQuestionButton;
-    private final CalculMentalFrame parentFrame;
+    private final CalculMentalFacile parentFrame;
 
-    public AnswerPanel(Font font, CalculMentalFrame parentFrame) {
-        this.parentFrame = parentFrame;  // Assure-toi que la référence à la fenêtre principale est bien passée ici
+    public ReponsePanelFacile(Font font, CalculMentalFacile parentFrame) {
+        this.parentFrame = parentFrame;
         this.setLayout(new BorderLayout());
 
         answerField = new JTextField(10);
         answerField.setFont(font);
         this.add(answerField, BorderLayout.CENTER);
+        
+        answerField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+                    e.consume(); // Empêche la saisie d'un caractère non numérique
+                }
+            }
+        });
 
         checkButton = new JButton("Vérifier");
         checkButton.setFont(font);
@@ -42,14 +50,14 @@ public class AnswerPanel extends JPanel {
         checkButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parentFrame.checkAnswer();  // Appelle la méthode de vérification dans la fenêtre principale
+                parentFrame.checkAnswer();
             }
         });
 
         newQuestionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parentFrame.generateNewQuestion(true);  // Appelle la méthode pour générer une nouvelle question, difficulté difficile
+                parentFrame.generateNewQuestionFacile(); // Supprimé le paramètre booléen
             }
         });
     }

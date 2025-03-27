@@ -33,6 +33,7 @@ public class Frame extends JFrame {
             accueil.setLayout(null);
             accueil.setBounds(0,0,this.getWidth(), this.getHeight());
             ArdoiseFacile ardoisef = new ArdoiseFacile(this);
+            ArdoiseDifficile ardoised = new ArdoiseDifficile(this);
             root.add(accueil);
             this.add(root);
             this.setJMenuBar(menu);
@@ -43,15 +44,6 @@ public class Frame extends JFrame {
             this.setVisible(true);
     }
 
-    public void showCalculMental() {
-        // Créer un nouveau panel pour le jeu Calcul Mental
-        CalculMentalFrame calculMentalFrame = new CalculMentalFrame();
-        
-        // Remplacer l'écran actuel par celui du jeu
-        this.getContentPane().removeAll();
-        this.add(calculMentalFrame);
-        this.revalidate();
-        this.repaint();
-    }
+    
         
 }

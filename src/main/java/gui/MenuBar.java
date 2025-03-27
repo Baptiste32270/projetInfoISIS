@@ -15,13 +15,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
-import javax.swing.SwingUtilities;
 
 public class MenuBar extends JMenuBar {
 	private JFrame frame;
 	public MenuBar(JFrame frame) {
-            //ArdoiseFacile ardoiseFacile = new ArdoiseFacile(frame);
-            //ArdoiseDifficile ardoiseDifficile = new ArdoiseDifficile(frame);
+            ArdoiseFacile ardoiseFacile = new ArdoiseFacile(frame);
+            ArdoiseDifficile ardoiseDifficile = new ArdoiseDifficile(frame);
             
             this.frame = frame;
             JMenu activite = new JMenu("Activités");
@@ -32,6 +31,11 @@ public class MenuBar extends JMenuBar {
                 frame.repaint();
             });
             JMenuItem calcul = new JMenuItem("Calcul Mental");
+            calcul.addActionListener(e -> {
+                frame.setContentPane(new CalculMentalFacile(18, frame));
+                frame.revalidate();
+                frame.repaint();
+            });
             JMenuItem pendu = new JMenuItem("Pendu");
 		
             JMenu retour = new JMenu("Accueil");
@@ -49,7 +53,7 @@ public class MenuBar extends JMenuBar {
                     //frame.setContentPane(new ArdoiseDifficile(frame));
                     frame.revalidate();
                     frame.repaint();});
-		
+
             difficulte.add(facile);
             difficulte.add(new JSeparator());
             difficulte.add(difficile);
@@ -62,17 +66,8 @@ public class MenuBar extends JMenuBar {
             activite.add(new JSeparator());
             activite.add(pendu);
 		
-		this.add(activite);
-		this.add(difficulte);
-                
-                //Permet de cliquer dans la menu bar sur Calcul Mental
-                calcul.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Passer à l'écran du jeu Calcul Mental dans la fenêtre principale
-                ((Frame) SwingUtilities.getWindowAncestor(MenuBar.this)).showCalculMental();
-            }
-        });
-                
+            this.add(retour);
+            this.add(activite);
+            this.add(difficulte);
 	}
 }
