@@ -10,21 +10,18 @@ package gui;
  */
 import java.awt.BorderLayout;
 import java.awt.Font;
-import javax.swing.JPanel;
 import java.util.Random;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class CalculMentalFacile extends JPanel {
     private final QuestionPanel questionPanel;
     private final ReponsePanelFacile reponsePanel;
     private final ResultPanel resultPanel;
-    private JFrame frame = new JFrame();
+    private final JButton solutionButton;
 
     private int correctReponse;
-
-    //public CalculMentalFacile() {
-        //this(18, frame);
-    //}
 
     public CalculMentalFacile(int fontSize, JFrame frame) {
         Font font = new Font("Serif", Font.BOLD, fontSize);
@@ -34,16 +31,29 @@ public class CalculMentalFacile extends JPanel {
         this.reponsePanel = new ReponsePanelFacile(font, this);
         this.resultPanel = new ResultPanel(font);
 
+        // Initialisation du bouton "Solution"
+        this.solutionButton = new JButton("Solution");
+        solutionButton.addActionListener(e -> showSolution()); // Action au clic
+
         initGui();
+        frame.setSize(300, 200);
+        frame.setLocationRelativeTo(null);
         generateNewQuestionFacile();
     }
 
     private void initGui() {
         this.setLayout(new BorderLayout(5, 5));
 
+        // Ajout des panneaux
         this.add(questionPanel, BorderLayout.NORTH);
         this.add(reponsePanel, BorderLayout.CENTER);
         this.add(resultPanel, BorderLayout.SOUTH);
+
+        // Ajout du bouton "Solution" au panneau inférieur
+        JPanel southPanel = new JPanel(new BorderLayout());
+        southPanel.add(resultPanel, BorderLayout.CENTER);
+        southPanel.add(solutionButton, BorderLayout.EAST);
+        this.add(southPanel, BorderLayout.SOUTH);
     }
 
     public void generateNewQuestionFacile() {
@@ -83,5 +93,10 @@ public class CalculMentalFacile extends JPanel {
         } catch (NumberFormatException e) {
             resultPanel.setResult("Veuillez entrer un nombre valide.");
         }
+    }
+
+    // Méthode pour afficher la solution
+    private void showSolution() {
+        resultPanel.setResult("La réponse est : " + correctReponse);
     }
 }
