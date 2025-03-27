@@ -24,22 +24,22 @@ public class Frame extends JFrame {
     }
 	
 	private void initGui() {
-            JPanel root = new JPanel();
+            JPanel root = new JPanel(); //Création d'un panel qui accueillera les autres panels
             BorderLayout bl = new BorderLayout(5, 5);
             root.setLayout(bl);
-            MenuBar menu = new MenuBar(this);
+            MenuBar menu = new MenuBar(this); //Importation Jmenu bar
         
-            AccueilPanel accueil = new AccueilPanel(this);
+            AccueilPanel accueil = new AccueilPanel(this); //Panel Accueil
             accueil.setLayout(null);
-            accueil.setBounds(0,0,this.getWidth(), this.getHeight());
-            ArdoiseFacile ardoisef = new ArdoiseFacile(this);
-            ArdoiseDifficile ardoised = new ArdoiseDifficile(this);
+            accueil.setBounds(0,0,this.getWidth(), this.getHeight()); //Panel accueil à la taille de la fenetre
+            ArdoiseFacile ardoisef = new ArdoiseFacile(this); //Panel ardoise facile
+            ArdoiseDifficile ardoised = new ArdoiseDifficile(this); //Panel ardoise difficile
             root.add(accueil);
             this.add(root);
             this.setJMenuBar(menu);
         
-            this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            this.setLocationRelativeTo(null);
+            this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Taille de la fenêtre au maximum
+            this.setLocationRelativeTo(null); //Fenêtre centrée
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.setVisible(true);
     }

@@ -17,14 +17,14 @@ public class AccueilPanel extends JPanel {
 	
 	public AccueilPanel(JFrame frame) {
 		this.setLayout(null);
-		Font font = new Font("Arial", Font.BOLD, 20);
+		Font font = new Font("Arial", Font.BOLD, 20); //On définit le style des caractère et leurs tailles
                 
             JButton dessin = new JButton("Ardoise Magique");
-            dessin.setBounds(607,210,300,100);
+            dessin.setBounds(607,210,300,100); //taille et placement du bouton Ardoise Magique
             dessin.setFont(font);
             this.add(dessin);
             dessin.addActionListener(e -> {
-                frame.setContentPane(new ArdoiseFacile(frame));
+                frame.setContentPane(new ArdoiseFacile(frame)); //Le panel dans notre frame devient le Panel ArdoiseFacile
                 frame.revalidate();
                 frame.repaint();
             });
