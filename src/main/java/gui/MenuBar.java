@@ -42,13 +42,6 @@ public class MenuBar extends JMenuBar {
             JMenu difficulte = new JMenu("Difficulté");
             JMenuItem facile = new JMenuItem("Facile");
             JMenuItem difficile = new JMenuItem("Difficile");
-            difficile.addActionListener(e -> {
-                if (frame.getContentPane() == ArdoiseFacile(frame)) {
-                    frame.setContentPane(new ArdoiseDifficile(frame));
-                    frame.revalidate();
-                    frame.repaint();
-                }
-            });
 		
             difficulte.add(facile);
             difficulte.add(new JSeparator());
