@@ -3,7 +3,7 @@ package gui;
 public enum Dictionnaire {
     INGENIEUR,
     ECOLE,
-    PROFFESSEUR,
+    PROFESSEUR,
     ENSEIGNEMENT,
     INFORMATIQUE,
     EVOLUER,

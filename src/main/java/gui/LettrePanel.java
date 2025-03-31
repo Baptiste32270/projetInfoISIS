@@ -2,38 +2,42 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
+/**
+ * Panneau contenant le clavier de lettres
+ */
 public class LettrePanel extends JPanel {
-
-    private final DisplayInterface display;
-    private final Font font;
-
-    public LettrePanel(DisplayInterface display, Font font) {
-        this.display = display;
-        this.font = font;
-        initGui();
-    }
-
-    LettrePanel() {
-        this.display = new DefaultDisplay();
-        this.font = new Font("Arial", Font.PLAIN, 14);  // Par défaut
-        initGui();
+    private final MotPanel motPanel;
+    private final LettresButton[] boutons;
+    
+    public LettrePanel(MotPanel motPanel) {
+        this.motPanel = motPanel;
+        this.boutons = new LettresButton[26];
+        initClavier();
     }
     
-    private void initGui() {
-        this.setFont(font);
-        GridLayout g1 = new GridLayout(2, 9, 3, 3);
-        this.setLayout(g1);
-        String[] lettres = {
-            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-            "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
-        };
+    private void initClavier() {
+        setLayout(new GridLayout(2, 13, 3, 3));
+        String[] lettres = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(",");
         
-        for (String value : lettres) {
-            LettresButton jb = new LettresButton(value);
-            jb.setFont(font);
-            jb.addActionListener((e) -> display.append(value));
-            this.add(jb);
+        for (int i = 0; i < lettres.length; i++) {
+            LettresButton bouton = new LettresButton(lettres[i]);
+            bouton.addActionListener(this::gererClicLettre);
+            boutons[i] = bouton;
+            add(bouton);
+        }
+    }
+    
+    private void gererClicLettre(ActionEvent e) {
+        LettresButton bouton = (LettresButton) e.getSource();
+        String lettre = bouton.getText();
+        motPanel.devinerLettre(lettre, bouton);
+    }
+    
+    public void resetBoutons() {
+        for (LettresButton bouton : boutons) {
+            bouton.reset();
         }
     }
 }

@@ -3,78 +3,91 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.Border;
-import java.util.Random;
 
+/**
+ * Panneau qui gère le mot à deviner et la logique du jeu
+ */
 public class MotPanel extends JPanel {
-
-    private final JLabel displayLabel;
-    private final Font font;
     private String motSecret;
     private String lettresDevinees;
-
-    public MotPanel(Font font) {
-        super();
-        this.font = font;
-        this.displayLabel = new JLabel(" ", JLabel.CENTER);
+    private final JLabel displayLabel;
+    private final DessinPanel dessinPanel;
+    private LettrePanel lettrePanel;
+    
+    public MotPanel(Font font, DessinPanel dessinPanel) {
+        this.dessinPanel = dessinPanel;
+        this.displayLabel = new JLabel("", JLabel.CENTER);
         this.lettresDevinees = "";
-        choisirMotSecret();  // Choisir un mot aléatoire
-        initGui();
-    }
-
-    MotPanel() {
-        super();
-        this.font = new Font("Arial", Font.PLAIN, 24);  // Par défaut
-        this.displayLabel = new JLabel(" ", JLabel.CENTER);
-        this.lettresDevinees = "";
-        choisirMotSecret();  // Choisir un mot aléatoire
-        initGui();
-    }
-
-    private void initGui() {
         displayLabel.setFont(font);
-        displayLabel.setBackground(Color.LIGHT_GRAY);
+        initAffichage();
+        choisirMotSecret();
+    }
+    
+    public void setLettrePanel(LettrePanel lettrePanel) {
+        this.lettrePanel = lettrePanel;
+    }
+    
+    private void initAffichage() {
+        setLayout(new BorderLayout());
         displayLabel.setOpaque(true);
-        this.setLayout(new BorderLayout());
-
-        // Créer une bordure pour l'afficheur
+        displayLabel.setBackground(Color.LIGHT_GRAY);
+        
         Border border = BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(Color.BLACK, 1),
-            BorderFactory.createEmptyBorder(3, 6, 3, 6)
+            BorderFactory.createLineBorder(Color.BLACK),
+            BorderFactory.createEmptyBorder(10, 20, 10, 20)
         );
         displayLabel.setBorder(border);
-        this.add(displayLabel, BorderLayout.CENTER);
+        add(displayLabel, BorderLayout.CENTER);
     }
-
+    
     private void choisirMotSecret() {
-        Dictionnaire[] valeurs = Dictionnaire.values();
-        Random random = new Random();
-        int index = random.nextInt(valeurs.length);
-        motSecret = valeurs[index].toString();
-        updateDisplay(" ");
+        motSecret = Dictionnaire.getMotAleatoire();
+        lettresDevinees = "";
+        actualiserAffichage();
     }
-
-    public void updateDisplay(String guessedLetter) {
-        if (motSecret.contains(guessedLetter)) {
-            lettresDevinees += guessedLetter;
+    
+    public void devinerLettre(String lettre, LettresButton bouton) {
+        boolean estCorrect = motSecret.contains(lettre);
+        bouton.setClique(estCorrect);
+        
+        if (estCorrect) {
+            lettresDevinees += lettre;
+        } else {
+            dessinPanel.decrementerTentatives();
         }
-
-        StringBuilder displayText = new StringBuilder();
-
-        for (int i = 0; i < motSecret.length(); i++) {
-            char letter = motSecret.charAt(i);
-            if (lettresDevinees.indexOf(letter) != -1) {
-                displayText.append(letter).append(" ");
-            } else {
-                displayText.append("_ ").append(" ");
-            }
-        }
-
-        displayLabel.setText(displayText.toString().trim());
+        
+        actualiserAffichage();
+        verifierFinPartie();
     }
-
-    public void reset() {
-        this.lettresDevinees = "";
-        this.displayLabel.setText(" ");
-        choisirMotSecret();  // Rechoisir un mot aléatoire
+    
+    private void actualiserAffichage() {
+        StringBuilder sb = new StringBuilder();
+        for (char c : motSecret.toCharArray()) {
+            sb.append(lettresDevinees.contains(String.valueOf(c)) ? c + " " : "_ ");
+        }
+        displayLabel.setText(sb.toString().trim());
+    }
+    
+    private void verifierFinPartie() {
+        // Vérifier victoire
+        if (motSecret.chars().allMatch(c -> lettresDevinees.contains(String.valueOf((char)c)))) {
+            dessinPanel.incrementerVictoires();
+            JOptionPane.showMessageDialog(this, "Gagné! Le mot était: " + motSecret);
+            resetGame();
+            return;
+        }
+        
+        // Vérifier défaite
+        if (dessinPanel.getAttemptsLeft() <= 0) {
+            dessinPanel.incrementerDefaites();
+            JOptionPane.showMessageDialog(this, "Perdu! Le mot était: " + motSecret);
+            resetGame();
+        }
+    }
+    
+    public void resetGame() {
+        choisirMotSecret();
+        dessinPanel.reset();
+        lettrePanel.resetBoutons();
     }
 }

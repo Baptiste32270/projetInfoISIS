@@ -2,39 +2,48 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
+/**
+ * Fenêtre principale du jeu du pendu
+ */
 public class PenduFinal extends JFrame {
-
+    
     public PenduFinal() {
-        this("Pendu");
+        super("Jeu du Pendu");
+        initInterface();
     }
-
-    public PenduFinal(String title) {
-        super(title);
-        initGui();
-    }  
-
-    private void initGui() {
-        JPanel root = new JPanel();
-        BorderLayout bl = new BorderLayout(5, 5);
-        root.setLayout(bl);
+    
+    private void initInterface() {
+        // Création des composants
+        DessinPanel dessinPanel = new DessinPanel();
+        MotPanel motPanel = new MotPanel(new Font("Arial", Font.BOLD, 24), dessinPanel);
+        LettrePanel lettrePanel = new LettrePanel(motPanel);
+        motPanel.setLettrePanel(lettrePanel);
         
-        // Création des panneaux
-        PenduPanel dessin = new PenduPanel();
-        LettrePanel lettre = new LettrePanel();
-        MotPanel mot = new MotPanel();
+        // Bouton Nouvelle Partie
+        JButton btnNouvellePartie = new JButton("Nouvelle Partie");
+        btnNouvellePartie.addActionListener(e -> motPanel.resetGame());
         
-        // Ajout des panneaux
-        root.add(dessin, BorderLayout.WEST);
-        root.add(lettre, BorderLayout.SOUTH);
-        root.add(mot, BorderLayout.EAST);
+        // Organisation de l'interface
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(dessinPanel, BorderLayout.CENTER);
+        mainPanel.add(motPanel, BorderLayout.NORTH);
+        mainPanel.add(lettrePanel, BorderLayout.SOUTH);
         
-        // Configuration de la fenêtre
-        this.add(root);
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setSize(500, 500);
-        this.setVisible(true);
+        JPanel panelBouton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelBouton.add(btnNouvellePartie);
+        mainPanel.add(panelBouton, BorderLayout.EAST);
+        
+        // Configuration fenêtre
+        setContentPane(mainPanel);
+        setSize(700, 600);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new PenduFinal());
     }
 }
