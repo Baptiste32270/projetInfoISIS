@@ -10,9 +10,9 @@ package gui;
  */
 import java.awt.BorderLayout;
 import java.awt.Font;
-import javax.swing.JPanel;
 import java.util.Random;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class CalculMentalDifficile extends JPanel {
     private final QuestionPanel questionPanel;
@@ -30,13 +30,13 @@ public class CalculMentalDifficile extends JPanel {
         this.resultPanel = new ResultPanel(font);
 
         initGui();
-        frame.setSize(300, 200);
+        frame.setSize(400, 300);  // Ajuster la taille de la fenêtre
         frame.setLocationRelativeTo(null);
         generateNewQuestionDifficile();
     }
 
     private void initGui() {
-        this.setLayout(new BorderLayout(5, 5));
+        this.setLayout(new BorderLayout(5, 5)); // Ajout de l'espacement entre les composants
 
         // Ajout des panneaux
         this.add(questionPanel, BorderLayout.NORTH);
@@ -84,5 +84,11 @@ public class CalculMentalDifficile extends JPanel {
             resultPanel.setResult("Veuillez entrer un nombre valide.");
         }
     }
+    
+    // Méthode pour afficher la solution
+    public void showSolution() {
+        reponsePanel.clearAnswer(); // Efface d'abord la réponse actuelle
+        reponsePanel.setAnswer(String.valueOf(correctReponse)); // Affiche la réponse correcte
+        resultPanel.setResult("Voici la solution !"); // Met à jour le message
+    }
 }
-
