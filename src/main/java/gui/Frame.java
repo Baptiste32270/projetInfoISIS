@@ -33,8 +33,8 @@ public class Frame extends JFrame {
             AccueilPanel accueil = new AccueilPanel(this); //Panel Accueil
             accueil.setLayout(null);
             accueil.setBounds(0,0,this.getWidth(), this.getHeight()); //Panel accueil à la taille de la fenetre
-            ArdoiseFacile ardoisef = new ArdoiseFacile(this); //Panel ardoise facile
-            ArdoiseDifficile ardoised = new ArdoiseDifficile(this); //Panel ardoise difficile
+            //ArdoiseFacile ardoisef = new ArdoiseFacile(this); //Panel ardoise facile
+            //ArdoiseDifficile ardoised = new ArdoiseDifficile(this); //Panel ardoise difficile
             root.add(accueil);
             this.add(root);
             this.setJMenuBar(menu);
@@ -44,3 +44,4 @@ public class Frame extends JFrame {
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.setVisible(true);
     }
+}
