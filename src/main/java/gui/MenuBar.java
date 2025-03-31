@@ -19,14 +19,14 @@ import javax.swing.JSeparator;
 public class MenuBar extends JMenuBar {
 	private JFrame frame;
 	public MenuBar(JFrame frame) {
-            ArdoiseFacile ardoiseFacile = new ArdoiseFacile(frame);
-            ArdoiseDifficile ardoiseDifficile = new ArdoiseDifficile(frame);
+            //ArdoiseFacile ardoiseFacile = new ArdoiseFacile(frame);
+            //ArdoiseDifficile ardoiseDifficile = new ArdoiseDifficile(frame);
             
             this.frame = frame;
             JMenu activite = new JMenu("Activités");
             JMenuItem dessin = new JMenuItem("Ardoise Magique");
             dessin.addActionListener(e -> {
-                frame.setContentPane(new ArdoiseFacile(frame));
+             //   frame.setContentPane(new ArdoiseFacile(frame));
                 frame.revalidate();
                 frame.repaint();
             });

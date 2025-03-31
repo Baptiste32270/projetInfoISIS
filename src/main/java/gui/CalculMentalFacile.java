@@ -11,7 +11,6 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.util.Random;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -19,7 +18,6 @@ public class CalculMentalFacile extends JPanel {
     private final QuestionPanel questionPanel;
     private final ReponsePanelFacile reponsePanel;
     private final ResultPanel resultPanel;
-    private final JButton solutionButton;
 
     private int correctReponse;
 
@@ -31,29 +29,19 @@ public class CalculMentalFacile extends JPanel {
         this.reponsePanel = new ReponsePanelFacile(font, this);
         this.resultPanel = new ResultPanel(font);
 
-        // Initialisation du bouton "Solution"
-        this.solutionButton = new JButton("Solution");
-        solutionButton.addActionListener(e -> showSolution()); // Action au clic
-
         initGui();
-        frame.setSize(300, 200);
+        frame.setSize(400, 300);  // Ajuster la taille de la fenêtre
         frame.setLocationRelativeTo(null);
         generateNewQuestionFacile();
     }
 
     private void initGui() {
-        this.setLayout(new BorderLayout(5, 5));
+        this.setLayout(new BorderLayout(5, 5)); // Ajout de l'espacement entre les composants
 
         // Ajout des panneaux
         this.add(questionPanel, BorderLayout.NORTH);
         this.add(reponsePanel, BorderLayout.CENTER);
         this.add(resultPanel, BorderLayout.SOUTH);
-
-        // Ajout du bouton "Solution" au panneau inférieur
-        JPanel southPanel = new JPanel(new BorderLayout());
-        southPanel.add(resultPanel, BorderLayout.CENTER);
-        southPanel.add(solutionButton, BorderLayout.EAST);
-        this.add(southPanel, BorderLayout.SOUTH);
     }
 
     public void generateNewQuestionFacile() {
@@ -79,7 +67,8 @@ public class CalculMentalFacile extends JPanel {
 
         questionPanel.setQuestion(question);
         reponsePanel.clearAnswer();
-        resultPanel.setResult(" ");
+        resultPanel.setResult("Résultat"); // Remettre un texte de base
+        resultPanel.setCorrectReponse(String.valueOf(correctReponse)); // Définir la réponse correcte dans ResultPanel
     }
 
     public void checkAnswer() {
@@ -93,10 +82,5 @@ public class CalculMentalFacile extends JPanel {
         } catch (NumberFormatException e) {
             resultPanel.setResult("Veuillez entrer un nombre valide.");
         }
-    }
-
-    // Méthode pour afficher la solution
-    private void showSolution() {
-        resultPanel.setResult("La réponse est : " + correctReponse);
     }
 }

@@ -18,16 +18,17 @@ public class ReponsePanelFacile extends JPanel {
     private JTextField answerField;
     private JButton checkButton;
     private JButton newQuestionButton;
+    private JButton solutionButton;
     private final CalculMentalFacile parentFrame;
 
     public ReponsePanelFacile(Font font, CalculMentalFacile parentFrame) {
         this.parentFrame = parentFrame;
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout(10, 10)); // Ajout de l'espacement entre les composants
 
         answerField = new JTextField(10);
         answerField.setFont(font);
-        this.add(answerField, BorderLayout.CENTER);
-        
+        this.add(answerField, BorderLayout.NORTH);  // Placer le champ de texte en haut
+
         answerField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -38,13 +39,23 @@ public class ReponsePanelFacile extends JPanel {
             }
         });
 
+        // Panel pour regrouper les boutons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BorderLayout(5, 5)); // Ajouter des marges
+
         checkButton = new JButton("Vérifier");
         checkButton.setFont(font);
-        this.add(checkButton, BorderLayout.EAST);
+        buttonPanel.add(checkButton, BorderLayout.WEST);
 
         newQuestionButton = new JButton("Nouveau");
         newQuestionButton.setFont(font);
-        this.add(newQuestionButton, BorderLayout.SOUTH);
+        buttonPanel.add(newQuestionButton, BorderLayout.CENTER);
+
+        solutionButton = new JButton("Solution");
+        solutionButton.setFont(font);
+        buttonPanel.add(solutionButton, BorderLayout.EAST);
+
+        this.add(buttonPanel, BorderLayout.CENTER); // Ajouter le panel des boutons au centre
 
         // Ajout des écouteurs d'événements
         checkButton.addActionListener(new ActionListener() {
@@ -58,6 +69,13 @@ public class ReponsePanelFacile extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 parentFrame.generateNewQuestionFacile(); // Supprimé le paramètre booléen
+            }
+        });
+
+        solutionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resultPanel.setResult("La réponse est : " + resultPanel.getCorrectReponse());
             }
         });
     }
