@@ -83,4 +83,11 @@ public class CalculMentalFacile extends JPanel {
             resultPanel.setResult("Veuillez entrer un nombre valide.");
         }
     }
+    
+    // Méthode pour afficher la solution
+    public void showSolution() {
+        reponsePanel.clearAnswer(); // Efface d'abord la réponse actuelle
+        reponsePanel.setAnswer(String.valueOf(correctReponse)); // Affiche la réponse correcte
+        resultPanel.setResult("Voici la solution !"); // Met à jour le message
+    }
 }
