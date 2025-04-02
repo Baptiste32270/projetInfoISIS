@@ -65,7 +65,6 @@ public class Frame extends JFrame {
 
     //Méthode pour changer de panneau
     public void showCard(String name) {
-        System.out.println("Changement vers : " + name); // DEBUG
         cardLayout.show(root, name);
         currentCard = name; // Mise à jour du panneau actuel
     }
