@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package gui;
 
-/**
- *
- * @author bapti
- */
+
+import javax.swing.*;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,3 +42,4 @@ public class AccueilPanel extends JPanel {
         this.add(calcul);
     }
 }
+
