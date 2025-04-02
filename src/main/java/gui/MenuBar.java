@@ -30,7 +30,6 @@ public class MenuBar extends JMenuBar {
         calcul.addActionListener(e -> this.frame.showCard("CALCUL_FACILE"));
 
         JMenuItem pendu = new JMenuItem("Pendu");
-        // TODO : Ajouter l'action pour le Pendu si nécessaire
 
         activite.add(dessin);
         activite.add(new JSeparator());
@@ -38,13 +37,13 @@ public class MenuBar extends JMenuBar {
         activite.add(new JSeparator());
         activite.add(pendu);
 
-        // 🔹 Menu Accueil
+        //Menu Accueil
         JMenu retour = new JMenu("Accueil");
         JMenuItem accueil = new JMenuItem("Accueil");
         accueil.addActionListener(e -> this.frame.showCard("ACCUEIL"));
         retour.add(accueil);
 
-        // 🔹 Menu Difficulté
+        //Menu Difficulté
         JMenu difficulte = new JMenu("Difficulté");
 
         JMenuItem facile = new JMenuItem("Facile");
@@ -69,7 +68,6 @@ public class MenuBar extends JMenuBar {
      */
     private void switchDifficulty(boolean toDifficult) {
         String currentPanel = frame.getCurrentCard();
-        System.out.println("Panel actuel : " + currentPanel); // DEBUG
 
         switch (currentPanel) {
             case "ARDOISE_FACILE":

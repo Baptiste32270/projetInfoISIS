@@ -46,11 +46,11 @@ public class Frame extends JFrame {
         root.add(ardoised, "ARDOISE_DIFFICILE");
         root.add(calculd, "CALCUL_DIFFICILE");
 
-        // 🔹 Ajout du panel root à la fenêtre
+        //Ajout du panel root à la fenêtre
         this.setLayout(new BorderLayout());
         this.add(root, BorderLayout.CENTER);
 
-        // 🔹 Ajout de la barre de menu
+        //Ajout de la barre de menu
         MenuBar menu = new MenuBar(this);
         this.setJMenuBar(menu);
 
