@@ -37,7 +37,7 @@ public class PenduFinal extends JFrame {
         
         // Configuration fenêtre
         setContentPane(mainPanel);
-        setSize(700, 600);
+        setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
