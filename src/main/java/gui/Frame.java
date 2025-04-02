@@ -8,42 +8,69 @@ package gui;
  *
  * @author bapti
  */
+
 import java.awt.BorderLayout;
-import java.awt.HeadlessException;
+import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Frame extends JFrame {
-	public Frame() throws HeadlessException {
+    private CardLayout cardLayout;
+    private JPanel root;
+    private String currentCard = "ACCUEIL"; // Variable pour stocker le panneau actuel
+
+    public Frame() {
         this("Jeux pour enfants");
     }
 
-	public Frame(String title) throws HeadlessException {
+    public Frame(String title) {
         super(title);
         initGui();
     }
-	
-	private void initGui() {
-		JPanel root = new JPanel();
-            BorderLayout bl = new BorderLayout(5, 5);
-            root.setLayout(bl);
-        
-            AccueilPanel accueil = new AccueilPanel(this); //Panel Accueil
-            accueil.setLayout(null);
-            accueil.setBounds(0,0,this.getWidth(), this.getHeight()); //Panel accueil à la taille de la fenetre
-            ArdoiseFacile ardoisef = new ArdoiseFacile(this); //Panel ardoise facile
-            ArdoiseDifficile ardoised = new ArdoiseDifficile(this); //Panel ardoise difficile
-            root.add(accueil);
-            MenuBar menu = new MenuBar(this);
-            this.add(root);
-            this.setJMenuBar(menu);
-        
-            this.setExtendedState(JFrame.MAXIMIZED_BOTH); //Taille de la fenêtre au maximum
-            this.setLocationRelativeTo(null); //Fenêtre centrée
-            this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            this.setVisible(true);
+
+    private void initGui() {
+        //Création du CardLayout et du panel root
+        cardLayout = new CardLayout();
+        root = new JPanel(cardLayout);
+
+        //Création et ajout des panneaux
+        AccueilPanel accueil = new AccueilPanel(this);
+        ArdoiseFacile ardoisef = new ArdoiseFacile(this);
+        CalculMentalFacile calculf = new CalculMentalFacile(18, this);
+        ArdoiseDifficile ardoised = new ArdoiseDifficile(this);
+        CalculMentalDifficile calculd = new CalculMentalDifficile(18, this);
+
+        root.add(accueil, "ACCUEIL");
+        root.add(ardoisef, "ARDOISE_FACILE");
+        root.add(calculf, "CALCUL_FACILE");
+        root.add(ardoised, "ARDOISE_DIFFICILE");
+        root.add(calculd, "CALCUL_DIFFICILE");
+
+        //Ajout du panel root à la fenêtre
+        this.setLayout(new BorderLayout());
+        this.add(root, BorderLayout.CENTER);
+
+        //Ajout de la barre de menu
+        MenuBar menu = new MenuBar(this);
+        this.setJMenuBar(menu);
+
+        //Paramètres de la fenêtre
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
     }
 
-    
-        
+    //Méthode pour changer de panneau
+    public void showCard(String name) {
+        System.out.println("Changement vers : " + name); // DEBUG
+        cardLayout.show(root, name);
+        currentCard = name; // Mise à jour du panneau actuel
+    }
+
+    //Méthode pour récupérer le panneau actuellement affiché
+    public String getCurrentCard() {
+        return currentCard;
+    }
 }
+
