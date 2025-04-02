@@ -8,6 +8,7 @@ package gui;
  *
  * @author bapti
  */
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -28,11 +29,11 @@ public class Frame extends JFrame {
     }
 
     private void initGui() {
-        // 🔹 Création du CardLayout et du panel root
+        //Création du CardLayout et du panel root
         cardLayout = new CardLayout();
         root = new JPanel(cardLayout);
 
-        // 🔹 Création et ajout des panneaux
+        //Création et ajout des panneaux
         AccueilPanel accueil = new AccueilPanel(this);
         ArdoiseFacile ardoisef = new ArdoiseFacile(this);
         CalculMentalFacile calculf = new CalculMentalFacile(18, this);
@@ -53,21 +54,21 @@ public class Frame extends JFrame {
         MenuBar menu = new MenuBar(this);
         this.setJMenuBar(menu);
 
-        // 🔹 Paramètres de la fenêtre
+        //Paramètres de la fenêtre
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
-    // 🔹 Méthode pour changer de panneau
+    //Méthode pour changer de panneau
     public void showCard(String name) {
         System.out.println("Changement vers : " + name); // DEBUG
         cardLayout.show(root, name);
         currentCard = name; // Mise à jour du panneau actuel
     }
 
-    // 🔹 Méthode pour récupérer le panneau actuellement affiché
+    //Méthode pour récupérer le panneau actuellement affiché
     public String getCurrentCard() {
         return currentCard;
     }
