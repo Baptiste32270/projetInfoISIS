@@ -20,7 +20,7 @@ public class MenuBar extends JMenuBar {
             throw new IllegalArgumentException("Erreur : la frame doit être une instance de Frame !");
         }
 
-        // 🔹 Menu Activités
+        //Menu Activités
         JMenu activite = new JMenu("Activités");
 
         JMenuItem dessin = new JMenuItem("Ardoise Magique");
@@ -32,6 +32,13 @@ public class MenuBar extends JMenuBar {
         JMenuItem pendu = new JMenuItem("Pendu");
         pendu.addActionListener(e -> this.frame.showCard("PENDU"));
 
+        //Menu administration
+        JMenuItem admin = new JMenuItem("Administration");
+        admin.addActionListener(e -> this.frame.showCard("ADMIN"));
+        JMenu adminMenu = new JMenu("Admin");
+        adminMenu.add(admin);
+        this.add(adminMenu);
+        
         activite.add(dessin);
         activite.add(new JSeparator());
         activite.add(calcul);
@@ -61,6 +68,8 @@ public class MenuBar extends JMenuBar {
         this.add(retour);
         this.add(activite);
         this.add(difficulte);
+        this.add(adminMenu);
+
     }
 
     /**

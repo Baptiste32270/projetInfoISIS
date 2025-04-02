@@ -14,4 +14,8 @@ public enum Dictionnaire {
         int index = (int) (Math.random() * mots.length);
         return mots[index].name();  // Retourner le mot sous forme de chaîne
     }
+    
+    public void AjoutMot(String mot) {
+        
+    }
 }
