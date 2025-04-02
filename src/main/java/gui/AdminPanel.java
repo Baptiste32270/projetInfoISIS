@@ -18,7 +18,7 @@ public class AdminPanel extends JPanel {
 
     public AdminPanel(Frame frame) {
         setLayout(new BorderLayout());
-        showLoginScreen(frame);  // L'écran de login de l'administrateur
+        showLoginScreen(frame);  // Afficher d'abord l'écran de login
     }
 
     private void showAdminScreen(Frame frame) {
@@ -61,7 +61,8 @@ public class AdminPanel extends JPanel {
         loginButton.addActionListener(e -> {
             String password = passwordField.getText().trim();
             if (isValidPassword(password)) {
-                showAdminScreen(frame);  // Passer à l'écran d'administration
+                // Lorsque le mot de passe est valide, changer de carte pour l'écran d'administration
+                frame.showCard("ADMIN");  // Afficher l'écran d'administration
             } else {
                 JOptionPane.showMessageDialog(this, "Mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
@@ -76,8 +77,7 @@ public class AdminPanel extends JPanel {
 
     // Vérifier le mot de passe
     private boolean isValidPassword(String password) {
-        // Vérification simple avec un mot de passe prédéfini
-        return "admin".equals(password);  // Changer ce mot de passe pour plus de sécurité
+        return "admin123".equals(password);  // Mot de passe pour l'admin
     }
 
     // Mettre à jour la liste des mots affichés
