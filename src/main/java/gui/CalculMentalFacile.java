@@ -31,6 +31,7 @@ public class CalculMentalFacile extends JPanel {
 
         initGui(); // Configuration de l'interface graphique
         frame.setLocationRelativeTo(null); // Centre la fenêtre sur l'écran
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);  // Met la fenêtre en plein écran
         generateNewQuestionFacile(); // Génère une première question
     }
     
@@ -77,6 +78,7 @@ public class CalculMentalFacile extends JPanel {
             int userAnswer = Integer.parseInt(reponsePanel.getAnswer()); // Récupère la réponse entrée par l'utilisateur
             if (userAnswer == correctReponse) { // Vérifie si la réponse de l'utilisateur est correcte
                 resultPanel.setResult("Correct !"); // Affiche "Correct !" si la réponse est juste
+                
             } else {
                 resultPanel.setResult("Faux, essayez encore !"); // Message d'erreur si la réponse est fausse
             }
@@ -90,5 +92,13 @@ public class CalculMentalFacile extends JPanel {
         reponsePanel.clearAnswer(); // Efface la réponse actuelle
         reponsePanel.setAnswer(String.valueOf(correctReponse)); // Affiche la réponse correcte
         resultPanel.setResult("Voici la solution !"); // Affiche un message indiquant la solution
+    }
+    
+    public int getCorrectReponse() {
+        return correctReponse;
+    }
+
+    public ResultPanel getResultPanel() {
+        return resultPanel;
     }
 }

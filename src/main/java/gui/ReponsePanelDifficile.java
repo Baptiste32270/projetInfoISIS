@@ -8,6 +8,8 @@ package gui;
  *
  * @author rkiekenm
  */
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
@@ -29,12 +31,18 @@ public class ReponsePanelDifficile extends JPanel {
 
     public ReponsePanelDifficile(Font font, CalculMentalDifficile parentFrame) {
         this.parentFrame = parentFrame;
-        this.setLayout(new GridLayout(2, 1, 5, 5)); // Ajout d'espacement entre les composants
-        this.setBorder(new EmptyBorder(10, 10, 10, 10)); // Marge autour du panel
+        this.setLayout(new BorderLayout(5, 5)); // Utilisation de BorderLayout pour séparer les zones
 
-        answerField = new JTextField(10);
-        answerField.setFont(font);
-        this.add(answerField);
+        // Création et configuration du champ de texte (réduit)
+        answerField = new JTextField(10); // Champ de texte de largeur réduite
+        Font biggerFont = font.deriveFont(font.getSize() + 5f); // Augmente la taille de la police de 5 points
+        answerField.setFont(biggerFont);
+        answerField.setPreferredSize(new Dimension(100, 30)); // Taille du champ de texte
+        answerField.setMaximumSize(new Dimension(100, 30)); // Limiter la taille à cette dimension
+        answerField.setHorizontalAlignment(JTextField.CENTER); // Centrer le texte à l'intérieur du champ
+        this.add(answerField, BorderLayout.CENTER); // Le champ de texte est au centre
+        
+        answerField.requestFocusInWindow();
 
         answerField.addKeyListener(new KeyAdapter() {
             @Override
@@ -46,30 +54,35 @@ public class ReponsePanelDifficile extends JPanel {
             }
         });
 
+        // Sous-panel pour les boutons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 3, 10, 0)); // 10px d'espace horizontal entre les boutons
-        buttonPanel.setBorder(new EmptyBorder(5, 0, 0, 0)); // Marge au-dessus des boutons
+        buttonPanel.setBorder(new EmptyBorder(10, 0, 10, 0)); // Marge au-dessus et au-dessous des boutons
 
+        // Création des boutons avec taille ajustée
         checkButton = new JButton("Vérifier");
         checkButton.setFont(font);
-        checkButton.setMargin(new Insets(5, 5, 5, 5)); // Réduction de la marge interne
+        checkButton.setPreferredSize(new Dimension(100, 40)); // Taille réduite des boutons
         buttonPanel.add(checkButton);
 
         newQuestionButton = new JButton("Nouveau");
         newQuestionButton.setFont(font);
-        newQuestionButton.setMargin(new Insets(5, 5, 5, 5));
+        newQuestionButton.setPreferredSize(new Dimension(100, 40)); // Taille réduite des boutons
         buttonPanel.add(newQuestionButton);
-        
+
         solutionButton = new JButton("Solution");
         solutionButton.setFont(font);
-        solutionButton.setMargin(new Insets(5, 5, 5, 5));
+        solutionButton.setPreferredSize(new Dimension(100, 40)); // Taille réduite des boutons
         buttonPanel.add(solutionButton);
-        
-        this.add(buttonPanel);
 
+        this.add(buttonPanel, BorderLayout.SOUTH); // Ajouter le panel des boutons en bas
+        
         // Listeners (inchangés)
         checkButton.addActionListener(e -> parentFrame.checkAnswer());
-        newQuestionButton.addActionListener(e -> parentFrame.generateNewQuestionDifficile());
+        newQuestionButton.addActionListener(e -> {
+            parentFrame.generateNewQuestionDifficile();  // Génère une nouvelle question
+            answerField.requestFocusInWindow(); // Focus automatique sur le champ de texte
+        });
         solutionButton.addActionListener(e -> parentFrame.showSolution());
     }
 
@@ -83,5 +96,11 @@ public class ReponsePanelDifficile extends JPanel {
     
     public void setAnswer(String answer) {
         answerField.setText(answer);
+    }
+
+    public void handleCorrectAnswer() {
+        parentFrame.generateNewQuestionDifficile(); // Génère une nouvelle question
+        clearAnswer(); // Réinitialise le champ de réponse
+        answerField.requestFocus(); // Sélectionne automatiquement le champ de réponse
     }
 }

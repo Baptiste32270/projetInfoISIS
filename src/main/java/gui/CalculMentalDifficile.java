@@ -8,11 +8,11 @@ package gui;
  *
  * @author rkiekenm
  */
-import java.awt.BorderLayout; 
-import java.awt.Font; 
-import java.util.Random; 
-import javax.swing.JFrame; 
-import javax.swing.JPanel; 
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.util.Random;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class CalculMentalDifficile extends JPanel {
     private final QuestionPanel questionPanel; // Panneau pour afficher la question
@@ -30,14 +30,14 @@ public class CalculMentalDifficile extends JPanel {
         this.resultPanel = new ResultPanel(font);
 
         initGui(); // Configuration de l'interface graphique
-        frame.setSize(400, 300);  // Définit la taille de la fenêtre
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);  // Met la fenêtre en plein écran
         frame.setLocationRelativeTo(null); // Centre la fenêtre sur l'écran
         generateNewQuestionDifficile(); // Génère une première question
     }
     
     //Méthode qui configure notre interface
     private void initGui() {
-        this.setLayout(new BorderLayout(5, 5)); // Définit la mise en page avec des marges entres les composants 
+        this.setLayout(new BorderLayout(5, 5)); // Définit un layout avec marges entre les composants
 
         // Ajout des panneaux dans la fenêtre
         this.add(questionPanel, BorderLayout.NORTH); // Panneau de question en haut
@@ -71,7 +71,8 @@ public class CalculMentalDifficile extends JPanel {
 
         questionPanel.setQuestion(question); // Met à jour l'affichage de la question
         reponsePanel.clearAnswer(); // Efface la réponse précédente
-        resultPanel.setResult(" "); // Réinitialise l'affichage du résultat
+        resultPanel.setResult("Résultat"); // Réinitialise l'affichage du résultat à "Résultat"
+        resultPanel.setCorrectReponse(String.valueOf(correctReponse)); // Définit la réponse correcte dans ResultPanel
     }
 
     public void checkAnswer() {
@@ -92,5 +93,13 @@ public class CalculMentalDifficile extends JPanel {
         reponsePanel.clearAnswer(); // Efface la réponse actuelle
         reponsePanel.setAnswer(String.valueOf(correctReponse)); // Affiche la réponse correcte
         resultPanel.setResult("Voici la solution !"); // Affiche un message indiquant la solution
+    }
+
+    public int getCorrectReponse() {
+        return correctReponse;
+    }
+
+    public ResultPanel getResultPanel() {
+        return resultPanel;
     }
 }

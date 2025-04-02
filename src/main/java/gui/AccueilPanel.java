@@ -38,7 +38,7 @@ public class AccueilPanel extends JPanel {
             calcul.setBounds(607,450,300,100);
             calcul.setFont(font);
             calcul.addActionListener(e -> {
-                frame.setContentPane(new CalculMentalFacile(18, frame));
+                frame.setContentPane(new CalculMentalDifficile(18, frame));
                 frame.revalidate();
                 frame.repaint();
             });

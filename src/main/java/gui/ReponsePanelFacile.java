@@ -4,16 +4,10 @@
  */
 package gui;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Insets;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class ReponsePanelFacile extends JPanel {
@@ -25,17 +19,20 @@ public class ReponsePanelFacile extends JPanel {
 
     public ReponsePanelFacile(Font font, CalculMentalFacile parentFrame) {
         this.parentFrame = parentFrame;
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Utilisation de BoxLayout pour centrer verticalement
-        this.setBorder(new EmptyBorder(10, 10, 10, 10)); // Marge autour du panel
+        this.setLayout(new BorderLayout(5, 5)); // Utilisation de BorderLayout pour séparer les zones
 
-        // Création et configuration du champ de texte
-        answerField = new JTextField(10);
-        answerField.setFont(font);
-        answerField.setAlignmentX(CENTER_ALIGNMENT); // Centrer le champ de texte
-        answerField.setPreferredSize(new Dimension(200, 30)); // Réduire la taille du champ de texte
-        answerField.setMaximumSize(new Dimension(200, 30)); // Assurer que le champ de texte ne dépasse pas cette taille
-        this.add(answerField);
+        // Création et configuration du champ de texte (réduit)
+        answerField = new JTextField(10); // Champ de texte de largeur réduite
+        Font biggerFont = font.deriveFont(font.getSize() + 5f); // Augmente la taille de la police de 5 points
+        answerField.setFont(biggerFont);
+        answerField.setPreferredSize(new Dimension(100, 30)); // Taille du champ de texte
+        answerField.setMaximumSize(new Dimension(100, 30)); // Limiter la taille à cette dimension
+        answerField.setHorizontalAlignment(JTextField.CENTER); // Centrer le texte à l'intérieur du champ
+        this.add(answerField, BorderLayout.CENTER); // Le champ de texte est au centre
+        
+        answerField.requestFocusInWindow();
 
+        // Empêcher l'utilisateur de saisir autre chose que des chiffres
         answerField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -46,11 +43,12 @@ public class ReponsePanelFacile extends JPanel {
             }
         });
 
+        // Sous-panel pour les boutons
         JPanel buttonPanel = new JPanel();
-        
         buttonPanel.setLayout(new GridLayout(1, 3, 10, 0)); // 10px d'espace horizontal entre les boutons
-        buttonPanel.setBorder(new EmptyBorder(5, 0, 0, 0)); // Marge au-dessus des boutons
+        buttonPanel.setBorder(new EmptyBorder(10, 0, 10, 0)); // Marge au-dessus et au-dessous des boutons
 
+        // Création des boutons avec taille ajustée
         checkButton = new JButton("Vérifier");
         checkButton.setFont(font);
         checkButton.setPreferredSize(new Dimension(100, 40)); // Taille réduite des boutons
@@ -60,17 +58,20 @@ public class ReponsePanelFacile extends JPanel {
         newQuestionButton.setFont(font);
         newQuestionButton.setPreferredSize(new Dimension(100, 40)); // Taille réduite des boutons
         buttonPanel.add(newQuestionButton);
-        
+
         solutionButton = new JButton("Solution");
         solutionButton.setFont(font);
         solutionButton.setPreferredSize(new Dimension(100, 40)); // Taille réduite des boutons
         buttonPanel.add(solutionButton);
-        
-        this.add(buttonPanel);
 
+        this.add(buttonPanel, BorderLayout.SOUTH); // Ajouter le panel des boutons en bas
+        
         // Listeners (inchangés)
         checkButton.addActionListener(e -> parentFrame.checkAnswer());
-        newQuestionButton.addActionListener(e -> parentFrame.generateNewQuestionFacile());
+        newQuestionButton.addActionListener(e -> {
+            parentFrame.generateNewQuestionFacile();  // Génère une nouvelle question
+            answerField.requestFocusInWindow(); // Focus automatique sur le champ de texte
+        });
         solutionButton.addActionListener(e -> parentFrame.showSolution());
     }
 
@@ -81,7 +82,7 @@ public class ReponsePanelFacile extends JPanel {
     public void clearAnswer() {
         answerField.setText("");
     }
-    
+
     public void setAnswer(String answer) {
         answerField.setText(answer);
     }
