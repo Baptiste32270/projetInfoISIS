@@ -24,10 +24,9 @@ public class Frame extends JFrame {
     }
 	
 	private void initGui() {
-            JPanel root = new JPanel(); //Création d'un panel qui accueillera les autres panels
+		JPanel root = new JPanel();
             BorderLayout bl = new BorderLayout(5, 5);
             root.setLayout(bl);
-            MenuBar menu = new MenuBar(this); //Importation Jmenu bar
         
             AccueilPanel accueil = new AccueilPanel(this); //Panel Accueil
             accueil.setLayout(null);
