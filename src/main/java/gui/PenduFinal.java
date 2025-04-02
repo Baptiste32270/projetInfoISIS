@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 /**
  * Panel principal du jeu du pendu qui remplace la JFrame
  */
-public class PenduPanel extends JPanel {
+public class PenduFinal extends JPanel {
     
     private DessinPanel dessinPanel;
     private MotPanel motPanel;
@@ -16,7 +16,7 @@ public class PenduPanel extends JPanel {
     /**
      * Constructeur du panel principal
      */
-    public PenduPanel() {
+    public PenduFinal() {
         setLayout(new BorderLayout());
         initComponents();
         setupInterface();

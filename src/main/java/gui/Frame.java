@@ -34,6 +34,7 @@ public class Frame extends JFrame {
             ArdoiseFacile ardoisef = new ArdoiseFacile(this); //Panel ardoise facile
             ArdoiseDifficile ardoised = new ArdoiseDifficile(this); //Panel ardoise difficile
             root.add(accueil);
+            MenuBar menu = new MenuBar(this);
             this.add(root);
             this.setJMenuBar(menu);
         
