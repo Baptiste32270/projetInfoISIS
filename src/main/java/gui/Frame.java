@@ -39,12 +39,14 @@ public class Frame extends JFrame {
         CalculMentalFacile calculf = new CalculMentalFacile(18, this);
         ArdoiseDifficile ardoised = new ArdoiseDifficile(this);
         CalculMentalDifficile calculd = new CalculMentalDifficile(18, this);
+        PenduFinal pendu = new PenduFinal(this);
 
         root.add(accueil, "ACCUEIL");
         root.add(ardoisef, "ARDOISE_FACILE");
         root.add(calculf, "CALCUL_FACILE");
         root.add(ardoised, "ARDOISE_DIFFICILE");
         root.add(calculd, "CALCUL_DIFFICILE");
+        root.add(pendu, "PENDU");
 
         //Ajout du panel root à la fenêtre
         this.setLayout(new BorderLayout());

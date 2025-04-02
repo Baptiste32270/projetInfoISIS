@@ -24,13 +24,18 @@ public class AccueilPanel extends JPanel {
             }
         });
 
-        // 🔹 Bouton pour le Pendu (Action à compléter)
+        //Bouton pour le Pendu (Action à compléter)
         JButton pendu = new JButton("Pendu");
         pendu.setBounds(607, 330, 300, 100);
         pendu.setFont(font);
+        pendu.addActionListener(e -> {
+            if (frame instanceof Frame) {
+                ((Frame) frame).showCard("PENDU");
+            }
+        });
         this.add(pendu);
 
-        // 🔹 Bouton pour le Calcul Mental
+        //Bouton pour le Calcul Mental
         JButton calcul = new JButton("Calcul Mental");
         calcul.setBounds(607, 450, 300, 100);
         calcul.setFont(font);

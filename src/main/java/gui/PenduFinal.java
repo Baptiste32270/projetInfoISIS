@@ -15,8 +15,9 @@ public class PenduFinal extends JPanel {
     
     /**
      * Constructeur du panel principal
+     * @param frame
      */
-    public PenduFinal() {
+    public PenduFinal(JFrame frame) {
         setLayout(new BorderLayout());
         initComponents();
         setupInterface();
@@ -51,9 +52,6 @@ public class PenduFinal extends JPanel {
         add(dessinPanel, BorderLayout.CENTER);
         add(motPanel, BorderLayout.NORTH);
         add(lettrePanel, BorderLayout.SOUTH);
-        add(panelBouton, BorderLayout.EAST);
-        
-        // Configuration de la taille préférée
-        setPreferredSize(new Dimension(800, 600));
+        add(panelBouton, BorderLayout.EAST);   
     }
 }

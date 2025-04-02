@@ -30,6 +30,7 @@ public class MenuBar extends JMenuBar {
         calcul.addActionListener(e -> this.frame.showCard("CALCUL_FACILE"));
 
         JMenuItem pendu = new JMenuItem("Pendu");
+        pendu.addActionListener(e -> this.frame.showCard("PENDU"));
 
         activite.add(dessin);
         activite.add(new JSeparator());
@@ -56,7 +57,7 @@ public class MenuBar extends JMenuBar {
         difficulte.add(new JSeparator());
         difficulte.add(difficile);
 
-        // 🔹 Ajout des menus à la barre de menu
+        //Ajout des menus à la barre de menu
         this.add(retour);
         this.add(activite);
         this.add(difficulte);
