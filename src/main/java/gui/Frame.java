@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class Frame extends JFrame {
     private CardLayout cardLayout;

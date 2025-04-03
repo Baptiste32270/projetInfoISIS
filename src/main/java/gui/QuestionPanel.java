@@ -17,7 +17,7 @@ public class QuestionPanel extends JPanel {
 
     public QuestionPanel(Font font) {
         questionLabel = new JLabel("Question", JLabel.CENTER);
-        questionLabel.setFont(font);
+        questionLabel.setFont(font.deriveFont(Font.BOLD, 36)); // Augmentation de la taille de la police
         this.add(questionLabel);
     }
 
