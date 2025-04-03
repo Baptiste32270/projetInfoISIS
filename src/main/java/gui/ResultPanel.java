@@ -20,7 +20,8 @@ public class ResultPanel extends JPanel {
 
     public ResultPanel(Font font) {
         resultLabel = new JLabel("Résultat", JLabel.CENTER);
-        resultLabel.setFont(font);
+        Font biggerFont = font.deriveFont(font.getSize() + 5f);
+        resultLabel.setFont(biggerFont);
         this.setLayout(new BorderLayout());
         this.add(resultLabel, BorderLayout.CENTER); // Placer le JLabel au centre
     }
