@@ -37,8 +37,8 @@ public class ReponsePanelDifficile extends JPanel {
         answerField = new JTextField(10); // Champ de texte de largeur réduite
         Font biggerFont = font.deriveFont(font.getSize() + 5f); // Augmente la taille de la police de 5 points
         answerField.setFont(biggerFont);
-        answerField.setPreferredSize(new Dimension(100, 30)); // Taille du champ de texte
-        answerField.setMaximumSize(new Dimension(100, 30)); // Limiter la taille à cette dimension
+        answerField.setPreferredSize(new Dimension(100, 100)); // Taille du champ de texte
+        answerField.setMaximumSize(new Dimension(100, 100)); // Limiter la taille à cette dimension
         answerField.setHorizontalAlignment(JTextField.CENTER); // Centrer le texte à l'intérieur du champ
         this.add(answerField, BorderLayout.CENTER); // Le champ de texte est au centre
         
@@ -98,9 +98,5 @@ public class ReponsePanelDifficile extends JPanel {
         answerField.setText(answer);
     }
 
-    public void handleCorrectAnswer() {
-        parentFrame.generateNewQuestionDifficile(); // Génère une nouvelle question
-        clearAnswer(); // Réinitialise le champ de réponse
-        answerField.requestFocus(); // Sélectionne automatiquement le champ de réponse
-    }
+    
 }
