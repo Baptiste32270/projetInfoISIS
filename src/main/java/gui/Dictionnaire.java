@@ -1,67 +1,38 @@
 package gui;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Dictionnaire {
+    private List<String> mots;
 
-    private static final String DICTIONARY_FILE = "words.txt"; // Fichier qui stocke les mots
-
-    // Liste des mots
-    private static List<String> mots;
-
-    static {
+    public Dictionnaire() {
         mots = new ArrayList<>();
-        loadMots();  // Charge les mots depuis le fichier lors de l'initialisation de la classe
+        // Ajout de quelques mots par défaut
+        mots.add("PENDU");
+        mots.add("JAVA");
+        mots.add("PROGRAMMATION");
+        mots.add("ORDINATEUR");
     }
 
-    // Charger les mots depuis le fichier
-    private static void loadMots() {
-        try {
-            if (Files.exists(Paths.get(DICTIONARY_FILE))) {
-                mots = Files.readAllLines(Paths.get(DICTIONARY_FILE), StandardCharsets.UTF_8);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public String getMotAleatoire() {
+        Random random = new Random();
+        return mots.get(random.nextInt(mots.size()));
+    }
+
+    public void ajouterMot(String mot) {
+        if (!mots.contains(mot)) {
+            mots.add(mot);
         }
     }
 
-    // Sauvegarder les mots dans le fichier
-    private static void saveMots() {
-        try {
-            Files.write(Paths.get(DICTIONARY_FILE), mots, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void supprimerMot(String mot) {
+        mots.remove(mot);
     }
 
-    // Ajouter un mot au dictionnaire
-    public static void addMot(String mot) {
-        if (!mots.contains(mot.toUpperCase())) {  // Eviter les doublons
-            mots.add(mot.toUpperCase());
-            saveMots();
-        }
-    }
-
-    // Supprimer un mot du dictionnaire
-    public static void removeMot(String mot) {
-        mots.remove(mot.toUpperCase());
-        saveMots();
-    }
-
-    // Retourner un mot aléatoire du dictionnaire
-    public static String getMotAleatoire() {
-        if (mots.isEmpty()) {
-            return null;  // Si le dictionnaire est vide
-        }
-        int index = (int) (Math.random() * mots.size());
-        return mots.get(index);  // Retourner le mot sous forme de chaîne
-    }
-
-    // Retourner tous les mots sous forme de liste
-    public static List<String> getAllMots() {
-        return mots;
+    // ✅ Ajout de la méthode getMots() pour récupérer la liste des mots
+    public List<String> getMots() {
+        return new ArrayList<>(mots);  // Retourne une copie pour éviter les modifications directes
     }
 }

@@ -40,7 +40,8 @@ public class Frame extends JFrame {
         ArdoiseDifficile ardoised = new ArdoiseDifficile(this);
         CalculMentalDifficile calculd = new CalculMentalDifficile(18, this);
         PenduFinal pendu = new PenduFinal(this);
-        AdminPanel adminPanel = new AdminPanel(this);
+        Dictionnaire dictionnaire = new Dictionnaire();
+        AdminPanel adminPanel = new AdminPanel(dictionnaire);
 
 
         root.add(accueil, "ACCUEIL");

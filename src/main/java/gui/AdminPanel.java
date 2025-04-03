@@ -10,99 +10,100 @@ package gui;
  */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AdminPanel extends JPanel {
+    private Dictionnaire dictionnaire;
+    private JList<String> listeMots;
+    private DefaultListModel<String> listModel;
+    private JTextField champMot;
+    private JButton btnFermer;
 
-    private JTextField wordField;
-    private JTextArea wordList;
-
-    public AdminPanel(Frame frame) {
+    public AdminPanel(Dictionnaire dictionnaire) {
+        this.dictionnaire = dictionnaire;
         setLayout(new BorderLayout());
-        showLoginScreen(frame);  // Afficher d'abord l'écran de login
+        initUI();
     }
 
-    private void showAdminScreen(Frame frame) {
-        setLayout(new BorderLayout());
-
+    private void initUI() {
         // Liste des mots
-        wordList = new JTextArea(10, 30);
-        wordList.setEditable(false);
-        updateWordList();  // Met à jour la liste des mots
+        listModel = new DefaultListModel<>();
+        mettreAJourListe();
+        listeMots = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(listeMots);
 
-        // Champ de saisie
-        wordField = new JTextField(20);
-        JButton addButton = new JButton("Ajouter");
-        JButton removeButton = new JButton("Supprimer");
-        JButton backButton = new JButton("Retour");
+        // Champ pour ajouter un mot
+        champMot = new JTextField(15);
+        JButton btnAjouter = new JButton("Ajouter");
+        JButton btnSupprimer = new JButton("Supprimer");
+        btnFermer = new JButton("Fermer");
 
-        addButton.addActionListener(e -> addWord());
-        removeButton.addActionListener(e -> removeWord());
-        backButton.addActionListener(e -> frame.showCard("ACCUEIL")); // Retour au menu principal
+        // Panel pour l'entrée utilisateur
+        JPanel panelSaisie = new JPanel();
+        panelSaisie.add(new JLabel("Mot: "));
+        panelSaisie.add(champMot);
+        panelSaisie.add(btnAjouter);
+        panelSaisie.add(btnSupprimer);
+        panelSaisie.add(btnFermer);
 
-        JPanel inputPanel = new JPanel();
-        inputPanel.add(new JLabel("Mot :"));
-        inputPanel.add(wordField);
-        inputPanel.add(addButton);
-        inputPanel.add(removeButton);
+        // Actions des boutons
+        btnAjouter.addActionListener(e -> ajouterMot());
+        btnSupprimer.addActionListener(e -> supprimerMot());
+        btnFermer.addActionListener(e -> fermerPanel());
 
-        add(new JScrollPane(wordList), BorderLayout.CENTER);
-        add(inputPanel, BorderLayout.SOUTH);
-        add(backButton, BorderLayout.NORTH);
+        // Ajouter les composants au panel
+        add(scrollPane, BorderLayout.CENTER);
+        add(panelSaisie, BorderLayout.SOUTH);
     }
 
-    // Afficher l'écran de login de l'administrateur
-    private void showLoginScreen(Frame frame) {
-        setLayout(new BorderLayout());
-
-        JPanel loginPanel = new JPanel();
-        JTextField passwordField = new JPasswordField(15);
-        JButton loginButton = new JButton("Login");
-
-        loginButton.addActionListener(e -> {
-            String password = passwordField.getText().trim();
-            if (isValidPassword(password)) {
-                // Lorsque le mot de passe est valide, changer de carte pour l'écran d'administration
-                frame.showCard("ADMIN");  // Afficher l'écran d'administration
-            } else {
-                JOptionPane.showMessageDialog(this, "Mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
-        loginPanel.add(new JLabel("Mot de passe :"));
-        loginPanel.add(passwordField);
-        loginPanel.add(loginButton);
-
-        add(loginPanel, BorderLayout.CENTER);
-    }
-
-    // Vérifier le mot de passe
-    private boolean isValidPassword(String password) {
-        return "admin123".equals(password);  // Mot de passe pour l'admin
-    }
-
-    // Mettre à jour la liste des mots affichés
-    private void updateWordList() {
-        java.util.List<String> mots = Dictionnaire.getAllMots();
-        wordList.setText(String.join("\n", mots));
-    }
-
-    // Ajouter un mot
-    private void addWord() {
-        String word = wordField.getText().trim().toUpperCase();
-        if (!word.isEmpty()) {
-            Dictionnaire.addMot(word);  // Ajouter le mot au dictionnaire
-            updateWordList();  // Mettre à jour l'affichage
-            wordField.setText("");  // Réinitialiser le champ de texte
+    private void mettreAJourListe() {
+        listModel.clear();
+        for (String mot : dictionnaire.getMots()) {
+            listModel.addElement(mot);
         }
     }
 
-    // Supprimer un mot
-    private void removeWord() {
-        String word = wordField.getText().trim().toUpperCase();
-        if (!word.isEmpty()) {
-            Dictionnaire.removeMot(word);  // Supprimer le mot du dictionnaire
-            updateWordList();  // Mettre à jour l'affichage
-            wordField.setText("");  // Réinitialiser le champ de texte
+    private void ajouterMot() {
+        String mot = champMot.getText().trim().toUpperCase();
+        if (!mot.isEmpty()) {
+            dictionnaire.ajouterMot(mot);
+            mettreAJourListe();
+            champMot.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Entrez un mot valide !");
         }
+    }
+
+    private void supprimerMot() {
+        String mot = listeMots.getSelectedValue();
+        if (mot != null) {
+            dictionnaire.supprimerMot(mot);
+            mettreAJourListe();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sélectionnez un mot à supprimer !");
+        }
+    }
+
+    private void fermerPanel() {
+        this.setVisible(false); // Cache le panel sans le supprimer
+    }
+
+    public static boolean demanderConnexion(Component parent) {
+        JTextField usernameField = new JTextField(10);
+        JPasswordField passwordField = new JPasswordField(10);
+
+        Object[] message = {
+            "Nom d'utilisateur:", usernameField,
+            "Mot de passe:", passwordField
+        };
+
+        int option = JOptionPane.showConfirmDialog(parent, message, "Connexion Admin", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION) {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+            return "admin".equals(username) && "password".equals(password); // Vérification basique
+        }
+        return false;
     }
 }

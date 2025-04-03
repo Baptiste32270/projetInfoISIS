@@ -3,7 +3,6 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.Border;
-
 /**
  * Panneau qui gère le mot à deviner et la logique du jeu
  */
@@ -13,25 +12,27 @@ public class MotPanel extends JPanel {
     private final JLabel displayLabel;
     private final DessinPanel dessinPanel;
     private LettrePanel lettrePanel;
-    
-    public MotPanel(Font font, DessinPanel dessinPanel) {
+    private Dictionnaire dictionnaire;  // Référence au dictionnaire
+
+    public MotPanel(Font font, DessinPanel dessinPanel, Dictionnaire dictionnaire) {
         this.dessinPanel = dessinPanel;
+        this.dictionnaire = dictionnaire;  // Initialisation du dictionnaire
         this.displayLabel = new JLabel("", JLabel.CENTER);
         this.lettresDevinees = "";
         displayLabel.setFont(font);
         initAffichage();
         choisirMotSecret();
     }
-    
+
     public void setLettrePanel(LettrePanel lettrePanel) {
         this.lettrePanel = lettrePanel;
     }
-    
+
     private void initAffichage() {
         setLayout(new BorderLayout());
         displayLabel.setOpaque(true);
         displayLabel.setBackground(Color.LIGHT_GRAY);
-        
+
         Border border = BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(Color.BLACK),
             BorderFactory.createEmptyBorder(10, 20, 10, 20)
@@ -39,27 +40,27 @@ public class MotPanel extends JPanel {
         displayLabel.setBorder(border);
         add(displayLabel, BorderLayout.CENTER);
     }
-    
+
     private void choisirMotSecret() {
-        motSecret = Dictionnaire.getMotAleatoire();
+        motSecret = dictionnaire.getMotAleatoire();  // Utilise le dictionnaire pour obtenir un mot aléatoire
         lettresDevinees = "";
         actualiserAffichage();
     }
-    
+
     public void devinerLettre(String lettre, LettresButton bouton) {
         boolean estCorrect = motSecret.contains(lettre);
         bouton.setClique(estCorrect);
-        
+
         if (estCorrect) {
             lettresDevinees += lettre;
         } else {
             dessinPanel.decrementerTentatives();
         }
-        
+
         actualiserAffichage();
         verifierFinPartie();
     }
-    
+
     private void actualiserAffichage() {
         StringBuilder sb = new StringBuilder();
         for (char c : motSecret.toCharArray()) {
@@ -67,7 +68,7 @@ public class MotPanel extends JPanel {
         }
         displayLabel.setText(sb.toString().trim());
     }
-    
+
     private void verifierFinPartie() {
         // Vérifier victoire
         if (motSecret.chars().allMatch(c -> lettresDevinees.contains(String.valueOf((char)c)))) {
@@ -76,7 +77,7 @@ public class MotPanel extends JPanel {
             resetGame();
             return;
         }
-        
+
         // Vérifier défaite
         if (dessinPanel.getAttemptsLeft() <= 0) {
             dessinPanel.incrementerDefaites();
@@ -84,7 +85,7 @@ public class MotPanel extends JPanel {
             resetGame();
         }
     }
-    
+
     public void resetGame() {
         choisirMotSecret();
         dessinPanel.reset();
