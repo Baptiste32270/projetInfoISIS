@@ -62,17 +62,17 @@ public class ReponsePanelDifficile extends JPanel {
         // Création des boutons avec taille ajustée
         checkButton = new JButton("Vérifier");
         checkButton.setFont(font);
-        checkButton.setPreferredSize(new Dimension(100, 40)); // Taille réduite des boutons
+        checkButton.setPreferredSize(new Dimension(100, 50)); // Taille réduite des boutons
         buttonPanel.add(checkButton);
 
         newQuestionButton = new JButton("Nouveau");
         newQuestionButton.setFont(font);
-        newQuestionButton.setPreferredSize(new Dimension(100, 40)); // Taille réduite des boutons
+        newQuestionButton.setPreferredSize(new Dimension(100, 50)); // Taille réduite des boutons
         buttonPanel.add(newQuestionButton);
 
         solutionButton = new JButton("Solution");
         solutionButton.setFont(font);
-        solutionButton.setPreferredSize(new Dimension(100, 40)); // Taille réduite des boutons
+        solutionButton.setPreferredSize(new Dimension(100, 50)); // Taille réduite des boutons
         buttonPanel.add(solutionButton);
 
         this.add(buttonPanel, BorderLayout.SOUTH); // Ajouter le panel des boutons en bas
