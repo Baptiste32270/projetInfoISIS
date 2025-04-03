@@ -12,6 +12,7 @@ import javax.swing.*;
 
 public class MenuBar extends JMenuBar {
     private Frame frame;
+    private boolean isDifficult;
 
     public MenuBar(JFrame frame) {
         if (frame instanceof Frame) {
@@ -48,10 +49,10 @@ public class MenuBar extends JMenuBar {
         JMenu difficulte = new JMenu("Difficulté");
 
         JMenuItem facile = new JMenuItem("Facile");
-        facile.addActionListener(e -> switchDifficulty(true)); // Facile → Difficile
+        facile.addActionListener(e -> switchDifficulty(false)); // Facile → Difficile
 
         JMenuItem difficile = new JMenuItem("Difficile");
-        difficile.addActionListener(e -> switchDifficulty(false)); // Difficile → Facile
+        difficile.addActionListener(e -> switchDifficulty(true)); // Difficile → Facile
 
         difficulte.add(facile);
         difficulte.add(new JSeparator());
@@ -68,6 +69,11 @@ public class MenuBar extends JMenuBar {
      * @param toDifficult true si on veut passer en mode difficile, false si on veut revenir en facile.
      */
     private void switchDifficulty(boolean toDifficult) {
+        
+        if (isDifficult==toDifficult){
+            return;
+        }
+        
         String currentPanel = frame.getCurrentCard();
 
         switch (currentPanel) {
@@ -87,6 +93,8 @@ public class MenuBar extends JMenuBar {
                 System.out.println("Aucun changement de difficulté possible sur ce panneau.");
                 break;
         }
+        
+        isDifficult = toDifficult;
     }
 }
 
