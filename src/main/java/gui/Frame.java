@@ -40,6 +40,7 @@ public class Frame extends JFrame {
         ArdoiseDifficile ardoised = new ArdoiseDifficile(this);
         CalculMentalDifficile calculd = new CalculMentalDifficile(18, this);
         PenduFinal pendu = new PenduFinal(this);
+        AdminPanel admin = new AdminPanel();
 
         root.add(accueil, "ACCUEIL");
         root.add(ardoisef, "ARDOISE_FACILE");
@@ -47,6 +48,7 @@ public class Frame extends JFrame {
         root.add(ardoised, "ARDOISE_DIFFICILE");
         root.add(calculd, "CALCUL_DIFFICILE");
         root.add(pendu, "PENDU");
+        root.add(admin, "ADMINISTRATION");
 
         //Ajout du panel root à la fenêtre
         this.setLayout(new BorderLayout());

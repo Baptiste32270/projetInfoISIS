@@ -57,11 +57,27 @@ public class MenuBar extends JMenuBar {
         difficulte.add(facile);
         difficulte.add(new JSeparator());
         difficulte.add(difficile);
+        
+        //Menu Administration
+        JMenu admin = new JMenu("Administration");
+        
+        JMenuItem connexion = new JMenuItem("Connexion");
+        connexion.addActionListener(e -> {
+            // On demande le mot de passe à chaque fois qu'on accède à la page Admin
+            if (new AdminPanel() != null) {
+                this.frame.showCard("ADMINISTRATION");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Mot de passe incorrect.");
+            }
+        });
+        
+        admin.add(connexion);
 
         //Ajout des menus à la barre de menu
         this.add(retour);
         this.add(activite);
         this.add(difficulte);
+        this.add(admin);
     }
 
     /**
@@ -69,11 +85,10 @@ public class MenuBar extends JMenuBar {
      * @param toDifficult true si on veut passer en mode difficile, false si on veut revenir en facile.
      */
     private void switchDifficulty(boolean toDifficult) {
-        
-        if (isDifficult==toDifficult){
+        if (isDifficult == toDifficult) {
             return;
         }
-        
+
         String currentPanel = frame.getCurrentCard();
 
         switch (currentPanel) {
@@ -93,8 +108,7 @@ public class MenuBar extends JMenuBar {
                 System.out.println("Aucun changement de difficulté possible sur ce panneau.");
                 break;
         }
-        
+
         isDifficult = toDifficult;
     }
 }
-
