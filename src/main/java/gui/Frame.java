@@ -23,8 +23,8 @@ public class Frame extends JFrame {
         this("Jeux pour enfants");
     }
 
-    public Frame(String title) {
-        super(title);
+    public Frame(String titre) {
+        super(titre);
         initGui();
     }
 
