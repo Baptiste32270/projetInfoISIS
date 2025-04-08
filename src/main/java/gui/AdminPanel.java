@@ -25,8 +25,8 @@ public class AdminPanel extends JPanel {
 
     private final String motsPath = "mots.txt";
 
-    // ✅ Mot de passe haché "admin" pour test direct (remplacer par ton propre mot de passe haché)
-    private final String storedHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";  // Remplace avec ton propre hachage
+    // Mot de passe haché 
+    private final String storedHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
 
     public AdminPanel() {
         setLayout(new BorderLayout());
