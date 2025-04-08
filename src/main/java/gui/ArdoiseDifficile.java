@@ -140,7 +140,7 @@ public class ArdoiseDifficile extends JPanel {
         }
     }
 
-    // Méthode pour effacer tout le canvas
+    // Méthode pour effacer tout le dessin
     private void toutEffacer() {
         if (outil != null) {
             outil.setColor(Color.WHITE); // Couleur du fond

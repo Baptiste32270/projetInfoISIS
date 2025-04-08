@@ -24,7 +24,7 @@ public class AccueilPanel extends JPanel {
             }
         });
 
-        //Bouton pour le Pendu (Action à compléter)
+        //Bouton pour le Pendu
         JButton pendu = new JButton("Pendu");
         pendu.setBounds(607, 330, 300, 100);
         pendu.setFont(font);
