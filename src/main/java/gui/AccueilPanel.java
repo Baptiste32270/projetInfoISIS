@@ -13,7 +13,7 @@ public class AccueilPanel extends JPanel {
         this.setLayout(null);
         Font font = new Font("Arial", Font.BOLD, 20);
 
-        // 🔹 Bouton pour l'Ardoise Magique
+        //Bouton pour l'Ardoise Magique
         JButton dessin = new JButton("Ardoise Magique");
         dessin.setBounds(607, 210, 300, 100);
         dessin.setFont(font);

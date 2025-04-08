@@ -12,7 +12,7 @@ import javax.swing.*;
 
 public class MenuBar extends JMenuBar {
     private Frame frame;
-    private boolean isDifficult;
+    private boolean difficulteDepart;
 
     public MenuBar(JFrame frame) {
         if (frame instanceof Frame) {
@@ -49,10 +49,10 @@ public class MenuBar extends JMenuBar {
         JMenu difficulte = new JMenu("Difficulté");
 
         JMenuItem facile = new JMenuItem("Facile");
-        facile.addActionListener(e -> switchDifficulty(false)); // Facile → Difficile
+        facile.addActionListener(e -> changerDifficulte(false)); // Facile → Difficile
 
         JMenuItem difficile = new JMenuItem("Difficile");
-        difficile.addActionListener(e -> switchDifficulty(true)); // Difficile → Facile
+        difficile.addActionListener(e -> changerDifficulte(true)); // Difficile → Facile
 
         difficulte.add(facile);
         difficulte.add(new JSeparator());
@@ -80,8 +80,8 @@ public class MenuBar extends JMenuBar {
         this.add(admin);
     }
 
-    private void switchDifficulty(boolean toDifficult) {
-        if (isDifficult == toDifficult) {
+    private void changerDifficulte(boolean diificulteArrivee) {
+        if (difficulteDepart == diificulteArrivee) {
             return;
         }
 
@@ -105,6 +105,6 @@ public class MenuBar extends JMenuBar {
                 break;
         }
 
-        isDifficult = toDifficult;
+        difficulteDepart = diificulteArrivee;
     }
 }

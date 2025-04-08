@@ -12,22 +12,22 @@ import java.awt.image.BufferedImage;
 public class ArdoiseFacile extends JPanel {
 
     // Zone de dessin (image mémoire)
-    private BufferedImage canvas;
+    private BufferedImage zoneDessin;
 
     // Outil pour dessiner sur le canvas
-    private Graphics2D g2d;
+    private Graphics2D outil;
 
     // Couleur actuelle du pinceau (par défaut : rouge)
-    private Color currentColor = Color.RED;
+    private Color couleurPinceau = Color.RED;
 
     // Indique si on est en mode gomme ou non
-    private boolean isErasing = false;
+    private boolean efface = false;
 
     // Taille du pinceau en pixels
-    private int brushSize = 10;
+    private int taillePinceau = 10;
 
     // Taille de la gomme en pixels
-    private int eraserSize = 30;
+    private int taileGomme = 30;
 
     // Constructeur principal
     public ArdoiseFacile(JFrame frame) {
@@ -38,43 +38,43 @@ public class ArdoiseFacile extends JPanel {
         int canvasHeight = 680;
 
         // Création du canvas avec fond transparent (ARGB)
-        canvas = new BufferedImage(canvasWidth, canvasHeight, BufferedImage.TYPE_INT_ARGB);
-        g2d = canvas.createGraphics(); // Récupère le contexte graphique
+        zoneDessin = new BufferedImage(canvasWidth, canvasHeight, BufferedImage.TYPE_INT_ARGB);
+        outil = zoneDessin.createGraphics(); // Récupère le contexte graphique
 
         // Initialise le fond en blanc
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, canvasWidth, canvasHeight);
+        outil.setColor(Color.WHITE);
+        outil.fillRect(0, 0, canvasWidth, canvasHeight);
 
         // Panel pour dessiner, relié au canvas
-        JPanel drawPanel = new JPanel() {
+        JPanel zoneDeDessin = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(canvas, 0, 0, null); // Affiche l'image dessinée
+                g.drawImage(zoneDessin, 0, 0, null); // Affiche l'image dessinée
             }
         };
 
         // Position et taille du panneau de dessin
-        drawPanel.setBounds(0, 0, canvasWidth, canvasHeight);
-        drawPanel.setBackground(Color.WHITE);
+        zoneDeDessin.setBounds(0, 0, canvasWidth, canvasHeight);
+        zoneDeDessin.setBackground(Color.WHITE);
 
         // Quand on clique, on dessine à l'endroit cliqué
-        drawPanel.addMouseListener(new MouseAdapter() {
+        zoneDeDessin.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                draw(e.getX(), e.getY());
+                dessin(e.getX(), e.getY());
             }
         });
 
         // Quand on glisse la souris, on continue de dessiner
-        drawPanel.addMouseMotionListener(new MouseMotionAdapter() {
+        zoneDeDessin.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                draw(e.getX(), e.getY());
+                dessin(e.getX(), e.getY());
             }
         });
 
-        this.add(drawPanel); // Ajoute le panneau de dessin au composant principal
+        this.add(zoneDeDessin); // Ajoute le panneau de dessin au composant principal
 
         // Police utilisée pour les boutons
         Font font = new Font("Arial", Font.BOLD, 10);
@@ -84,8 +84,8 @@ public class ArdoiseFacile extends JPanel {
         effacer.setBounds(500, 700, 100, 50);
         effacer.setFont(font);
         effacer.addActionListener(e -> {
-            clearCanvas();       // Vide le canvas
-            drawPanel.repaint(); // Redessine l'écran
+            toutEffacer();       // Vide le canvas
+            zoneDeDessin.repaint(); // Redessine l'écran
         });
         this.add(effacer);
 
@@ -94,7 +94,7 @@ public class ArdoiseFacile extends JPanel {
         gomme.setBounds(610, 700, 100, 50);
         gomme.setFont(font);
         gomme.addActionListener(e -> {
-            isErasing = true; // Active le mode gomme
+            efface = true; // Active le mode gomme
         });
         this.add(gomme);
 
@@ -104,8 +104,8 @@ public class ArdoiseFacile extends JPanel {
         rouge.setFont(font);
         rouge.setForeground(Color.RED); // Texte en rouge
         rouge.addActionListener(e -> {
-            currentColor = Color.RED; // Change la couleur du pinceau
-            isErasing = false;        // Désactive la gomme
+            couleurPinceau = Color.RED; // Change la couleur du pinceau
+            efface = false;        // Désactive la gomme
         });
         this.add(rouge);
 
@@ -115,8 +115,8 @@ public class ArdoiseFacile extends JPanel {
         vert.setFont(font);
         vert.setForeground(Color.GREEN);
         vert.addActionListener(e -> {
-            currentColor = Color.GREEN;
-            isErasing = false;
+            couleurPinceau = Color.GREEN;
+            efface = false;
         });
         this.add(vert);
 
@@ -126,8 +126,8 @@ public class ArdoiseFacile extends JPanel {
         bleu.setFont(font);
         bleu.setForeground(Color.BLUE);
         bleu.addActionListener(e -> {
-            currentColor = Color.BLUE;
-            isErasing = false;
+            couleurPinceau = Color.BLUE;
+            efface = false;
         });
         this.add(bleu);
 
@@ -136,26 +136,26 @@ public class ArdoiseFacile extends JPanel {
     }
 
     // Méthode pour dessiner ou gommer à une position donnée
-    private void draw(int x, int y) {
-        if (g2d != null) {
-            if (isErasing) {
+    private void dessin(int x, int y) {
+        if (outil != null) {
+            if (efface) {
                 // Dessine un rectangle blanc pour effacer
-                g2d.setColor(Color.WHITE);
-                g2d.fillRect(x - eraserSize / 2, y - eraserSize / 2, eraserSize, eraserSize);
+                outil.setColor(Color.WHITE);
+                outil.fillRect(x - taileGomme / 2, y - taileGomme / 2, taileGomme, taileGomme);
             } else {
                 // Dessine un rectangle de la couleur actuelle
-                g2d.setColor(currentColor);
-                g2d.fillRect(x - brushSize / 2, y - brushSize / 2, brushSize, brushSize);
+                outil.setColor(couleurPinceau);
+                outil.fillRect(x - taillePinceau / 2, y - taillePinceau / 2, taillePinceau, taillePinceau);
             }
             repaint(); // Redessine l'écran après le trait
         }
     }
 
     // Efface complètement le canvas en remplissant de blanc
-    private void clearCanvas() {
-        if (g2d != null) {
-            g2d.setColor(Color.WHITE);
-            g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    private void toutEffacer() {
+        if (outil != null) {
+            outil.setColor(Color.WHITE);
+            outil.fillRect(0, 0, zoneDessin.getWidth(), zoneDessin.getHeight());
         }
     }
 }
