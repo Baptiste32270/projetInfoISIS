@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 public class Frame extends JFrame {
     private CardLayout cardLayout;
     private JPanel root;
-    private String currentCard = "ACCUEIL"; // Variable pour stocker le panneau actuel
+    private String affichage = "ACCUEIL"; // Variable pour stocker le panel affiché
 
     public Frame() {
         this("Jeux pour enfants");
@@ -66,14 +66,14 @@ public class Frame extends JFrame {
     }
 
     //Méthode pour changer de panneau
-    public void showCard(String name) {
+    public void voirPanel(String name) {
         cardLayout.show(root, name);
-        currentCard = name; // Mise à jour du panneau actuel
+        affichage = name; // Mise à jour du panneau actuel
     }
 
     //Méthode pour récupérer le panneau actuellement affiché
-    public String getCurrentCard() {
-        return currentCard;
+    public String panelActuel() {
+        return affichage;
     }
 }
 

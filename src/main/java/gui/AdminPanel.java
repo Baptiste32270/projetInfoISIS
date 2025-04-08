@@ -20,29 +20,29 @@ public class AdminPanel extends JPanel {
     private DefaultListModel<String> listModel = new DefaultListModel<>();
     private JList<String> wordList = new JList<>(listModel);
     private JTextField wordField = new JTextField();
-    private JButton addButton = new JButton("Ajouter");
-    private JButton deleteButton = new JButton("Supprimer");
+    private JButton ajouter = new JButton("Ajouter");
+    private JButton supprimer = new JButton("Supprimer");
 
-    private final String motsPath = "mots.txt";
+    private final String liste = "mots.txt";
 
     // Mot de passe haché 
-    private final String storedHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
+    private final String mdpHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
 
     public AdminPanel() {
         setLayout(new BorderLayout());
 
         // Si l'utilisateur n'est pas autorisé, afficher "Accès refusé"
-        if (!authorize()) {
+        if (!autorisation()) {
             removeAll();
             add(new JLabel("Accès refusé", SwingConstants.CENTER), BorderLayout.CENTER);
             return;
         }
 
-        loadWords();
+        chargerMots();
         buildUI();
     }
 
-    private boolean authorize() {
+    private boolean autorisation() {
         // Demander le mot de passe avec un champ de texte sécurisé
         JPasswordField pwdField = new JPasswordField();
         int result = JOptionPane.showConfirmDialog(
@@ -65,16 +65,16 @@ public class AdminPanel extends JPanel {
             // Calculer le hash du mot de passe entré
             String inputHash = hashPassword(inputPassword);
 
-            // ✅ DEBUG : Afficher les hachages pour vérifier
-            System.out.println("Hash attendu    : " + storedHash);
+            //DEBUG : Afficher les hachages pour vérifier
+            System.out.println("Hash attendu    : " + mdpHash);
             System.out.println("Hash utilisateur : " + inputHash);
 
             // Comparer les hachages
-            if (!inputHash.equals(storedHash)) {
-                System.out.println("❌ Mot de passe incorrect");
+            if (!inputHash.equals(mdpHash)) {
+                System.out.println("Mot de passe incorrect");
                 return false;
             } else {
-                System.out.println("✅ Mot de passe correct");
+                System.out.println("Mot de passe correct");
                 return true;
             }
 
@@ -94,9 +94,9 @@ public class AdminPanel extends JPanel {
         return hexString.toString();
     }
 
-    private void loadWords() {
+    private void chargerMots() {
         listModel.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader(motsPath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(liste))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 listModel.addElement(line.trim());
@@ -106,8 +106,8 @@ public class AdminPanel extends JPanel {
         }
     }
 
-    private void saveWords() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(motsPath))) {
+    private void sauvegardeMots() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(liste))) {
             for (int i = 0; i < listModel.size(); i++) {
                 writer.write(listModel.getElementAt(i));
                 writer.newLine();
@@ -125,38 +125,38 @@ public class AdminPanel extends JPanel {
         // Champ d'ajout + bouton
         JPanel inputPanel = new JPanel(new BorderLayout());
         inputPanel.add(wordField, BorderLayout.CENTER);
-        inputPanel.add(addButton, BorderLayout.EAST);
+        inputPanel.add(ajouter, BorderLayout.EAST);
         add(inputPanel, BorderLayout.NORTH);
 
         // Bouton suppression
         JPanel deletePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        deletePanel.add(deleteButton);
+        deletePanel.add(supprimer);
         add(deletePanel, BorderLayout.SOUTH);
 
         // Action pour ajouter un mot
-        addButton.addActionListener(e -> {
+        ajouter.addActionListener(e -> {
             String word = wordField.getText().trim();  // Nettoyer les espaces autour du mot
             if (!word.isEmpty() && !listModel.contains(word)) {
                 // Mettre le mot en majuscule et enlever les accents avant de l'ajouter
-                word = normalizeWord(word);
+                word = normalizer(word);
                 listModel.addElement(word);
                 wordField.setText("");  // Réinitialiser le champ de texte
-                saveWords();
+                sauvegardeMots();
             }
         });
 
         // Action pour supprimer un mot
-        deleteButton.addActionListener(e -> {
+        supprimer.addActionListener(e -> {
             int selectedIndex = wordList.getSelectedIndex();
             if (selectedIndex != -1) {
                 listModel.remove(selectedIndex);
-                saveWords();
+                sauvegardeMots();
             }
         });
     }
 
     // Méthode pour transformer un mot en majuscule et sans accents
-    private String normalizeWord(String word) {
+    private String normalizer(String word) {
         // Mettre le mot en majuscule
         word = word.toUpperCase();
 

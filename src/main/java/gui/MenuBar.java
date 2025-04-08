@@ -25,13 +25,13 @@ public class MenuBar extends JMenuBar {
         JMenu activite = new JMenu("Activités");
 
         JMenuItem dessin = new JMenuItem("Ardoise Magique");
-        dessin.addActionListener(e -> this.frame.showCard("ARDOISE_FACILE"));
+        dessin.addActionListener(e -> this.frame.voirPanel("ARDOISE_FACILE"));
 
         JMenuItem calcul = new JMenuItem("Calcul Mental");
-        calcul.addActionListener(e -> this.frame.showCard("CALCUL_FACILE"));
+        calcul.addActionListener(e -> this.frame.voirPanel("CALCUL_FACILE"));
 
         JMenuItem pendu = new JMenuItem("Pendu");
-        pendu.addActionListener(e -> this.frame.showCard("PENDU"));
+        pendu.addActionListener(e -> this.frame.voirPanel("PENDU"));
 
         activite.add(dessin);
         activite.add(new JSeparator());
@@ -42,7 +42,7 @@ public class MenuBar extends JMenuBar {
         //Menu Accueil
         JMenu retour = new JMenu("Accueil");
         JMenuItem accueil = new JMenuItem("Accueil");
-        accueil.addActionListener(e -> this.frame.showCard("ACCUEIL"));
+        accueil.addActionListener(e -> this.frame.voirPanel("ACCUEIL"));
         retour.add(accueil);
 
         //Menu Difficulté
@@ -65,7 +65,7 @@ public class MenuBar extends JMenuBar {
         connexion.addActionListener(e -> {
             // On demande le mot de passe à chaque fois qu'on accède à la page Admin
             if (new AdminPanel() != null) {
-                this.frame.showCard("ADMINISTRATION");
+                this.frame.voirPanel("ADMINISTRATION");
             } else {
                 JOptionPane.showMessageDialog(frame, "Mot de passe incorrect.");
             }
@@ -80,29 +80,25 @@ public class MenuBar extends JMenuBar {
         this.add(admin);
     }
 
-    /**
-     * Change la difficulté en fonction du panneau actuellement affiché.
-     * @param toDifficult true si on veut passer en mode difficile, false si on veut revenir en facile.
-     */
     private void switchDifficulty(boolean toDifficult) {
         if (isDifficult == toDifficult) {
             return;
         }
 
-        String currentPanel = frame.getCurrentCard();
+        String currentPanel = frame.panelActuel();
 
         switch (currentPanel) {
             case "ARDOISE_FACILE":
-                frame.showCard("ARDOISE_DIFFICILE");
+                frame.voirPanel("ARDOISE_DIFFICILE");
                 break;
             case "ARDOISE_DIFFICILE":
-                frame.showCard("ARDOISE_FACILE");
+                frame.voirPanel("ARDOISE_FACILE");
                 break;
             case "CALCUL_FACILE":
-                frame.showCard("CALCUL_DIFFICILE");
+                frame.voirPanel("CALCUL_DIFFICILE");
                 break;
             case "CALCUL_DIFFICILE":
-                frame.showCard("CALCUL_FACILE");
+                frame.voirPanel("CALCUL_FACILE");
                 break;
             default:
                 System.out.println("Aucun changement de difficulté possible sur ce panneau.");

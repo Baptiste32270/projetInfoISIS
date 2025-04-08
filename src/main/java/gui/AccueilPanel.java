@@ -20,7 +20,7 @@ public class AccueilPanel extends JPanel {
         this.add(dessin);
         dessin.addActionListener(e -> {
             if (frame instanceof Frame) {
-                ((Frame) frame).showCard("ARDOISE_FACILE");
+                ((Frame) frame).voirPanel("ARDOISE_FACILE");
             }
         });
 
@@ -30,7 +30,7 @@ public class AccueilPanel extends JPanel {
         pendu.setFont(font);
         pendu.addActionListener(e -> {
             if (frame instanceof Frame) {
-                ((Frame) frame).showCard("PENDU");
+                ((Frame) frame).voirPanel("PENDU");
             }
         });
         this.add(pendu);
@@ -41,7 +41,7 @@ public class AccueilPanel extends JPanel {
         calcul.setFont(font);
         calcul.addActionListener(e -> {
             if (frame instanceof Frame) {
-                ((Frame) frame).showCard("CALCUL_FACILE");
+                ((Frame) frame).voirPanel("CALCUL_FACILE");
             }
         });
         this.add(calcul);
