@@ -66,7 +66,7 @@ public class ReponsePanelFacile extends JPanel {
 
         this.add(buttonPanel, BorderLayout.SOUTH); // Ajouter le panel des boutons en bas
         
-        // Listeners (inchangés)
+        // Listeners
         checkButton.addActionListener(e -> parentFrame.checkAnswer());
         newQuestionButton.addActionListener(e -> {
             parentFrame.generateNewQuestionFacile();  // Génère une nouvelle question
