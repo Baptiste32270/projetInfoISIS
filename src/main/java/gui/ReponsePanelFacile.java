@@ -30,7 +30,7 @@ public class ReponsePanelFacile extends JPanel {
         answerField.setHorizontalAlignment(JTextField.CENTER); // Centrer le texte à l'intérieur du champ
         this.add(answerField, BorderLayout.CENTER); // Le champ de texte est au centre
         
-        answerField.requestFocusInWindow();
+        
 
         // Empêcher l'utilisateur de saisir autre chose que des chiffres
         answerField.addKeyListener(new KeyAdapter() {
