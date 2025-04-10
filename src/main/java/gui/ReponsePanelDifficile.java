@@ -42,7 +42,7 @@ public class ReponsePanelDifficile extends JPanel {
         answerField.setHorizontalAlignment(JTextField.CENTER); // Centrer le texte à l'intérieur du champ
         this.add(answerField, BorderLayout.CENTER); // Le champ de texte est au centre
         
-        answerField.requestFocusInWindow();
+
 
         answerField.addKeyListener(new KeyAdapter() {
             @Override
